@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f2748" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="icon-180.png" />
+<title>My Wealth Forecast</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#64748b;--line:#dbe3ef;--accent:#1f5fbf}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{padding:calc(22px + env(safe-area-inset-top)) 18px 22px;background:#0f2748;color:#fff} header h1{margin:0 0 5px;font-size:27px} header p{margin:0;color:#d9e5f5}
+main{max-width:900px;margin:16px auto;padding:0 14px calc(30px + env(safe-area-inset-bottom))}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(15,39,72,.04)}
+h2{margin:0 0 12px;font-size:19px} h3{margin:16px 0 8px;font-size:15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
+input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;background:#fff}button{border:0;border-radius:10px;padding:11px 14px;background:var(--accent);color:#fff;font-weight:600;font-size:15px}.secondary{background:#e8eef8;color:#153b72}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.kpi{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.kpi .v{font-size:21px;font-weight:700}.kpi .l{font-size:11px;color:var(--muted);margin-top:3px}.note{font-size:12px;color:var(--muted);line-height:1.45}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;max-height:470px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px 9px;border-bottom:1px solid #edf2f7;text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{position:sticky;top:0;background:#f8fafc}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>My Wealth Forecast</h1><p>30-year personal investment projection</p></header>
+<main>
+<section class="card"><h2>Your inputs</h2><p class="note">Your entries are saved only in this browser on this device using local storage. This page starts with example figures, not your real holdings.</p>
+<h3>Current position</h3><div class="grid">
+<div><label>Your age</label><input id="age" type="number" value="63"></div><div><label>Forecast years</label><input id="years" type="number" value="30"></div>
+<div><label>Pension investments (£)</label><input id="pension" type="number" value="800000"></div><div><label>ISAs + Unit Trusts (£)</label><input id="isa" type="number" value="150000"></div>
+<div><label>Cash / savings (£)</label><input id="cash" type="number" value="50000"></div><div><label>Home value (£, optional)</label><input id="home" type="number" value="400000"></div></div>
+<h3>Income & spending</h3><div class="grid">
+<div><label>Annual household spending (£, today's money)</label><input id="spend" type="number" value="70000"></div><div><label>Spouse State Pension (£/yr)</label><input id="spouseSP" type="number" value="12000"></div>
+<div><label>Spouse private pension (£/yr)</label><input id="spousePP" type="number" value="3000"></div><div><label>Your State Pension (£/yr)</label><input id="userSP" type="number" value="12000"></div>
+<div><label>Your State Pension starts at age</label><input id="spAge" type="number" value="67"></div><div><label>Other annual income (£)</label><input id="otherIncome" type="number" value="0"></div></div>
+<h3>Assumptions</h3><div class="grid">
+<div><label>Gross investment growth (%)</label><input id="growth" type="number" step=".1" value="5"></div><div><label>Annual fees (%)</label><input id="fees" type="number" step=".1" value="1"></div>
+<div><label>Inflation (%)</label><input id="inflation" type="number" step=".1" value="3"></div><div><label>Cash interest (%)</label><input id="cashRate" type="number" step=".1" value="3"></div>
+<div><label>Effective tax on pension withdrawals (%)</label><input id="tax" type="number" step=".1" value="15"></div><div><label>Withdrawal order</label><select id="order"><option value="cash-isa-pension">Cash → ISA/UT → Pension</option><option value="isa-cash-pension">ISA/UT → Cash → Pension</option><option value="pension-isa-cash">Pension → ISA/UT → Cash</option></select></div></div>
+<div class="actions"><button onclick="run()">Calculate</button><button class="secondary" onclick="clearSaved()">Clear saved data</button></div></section>
+<section class="card"><h2>Forecast summary</h2><div class="kpis"><div class="kpi"><div class="v" id="startWealth">—</div><div class="l">Starting financial assets</div></div><div class="kpi"><div class="v" id="endWealth">—</div><div class="l">Assets at end</div></div><div class="kpi"><div class="v" id="runout">—</div><div class="l">Projected depletion age</div></div></div><p id="summary" class="note"></p></section>
+<section class="card"><h2>Year-by-year projection</h2><div class="table-wrap"><table><thead><tr><th>Year</th><th>Age</th><th>Spending</th><th>Income</th><th>Cash</th><th>ISA/UT</th><th>Pension</th><th>Total</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
+</main>
+<script>
+const fields=['age','years','pension','isa','cash','home','spend','spouseSP','spousePP','userSP','spAge','otherIncome','growth','fees','inflation','cashRate','tax','order'];
+const money=x=>new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:0}).format(x);
+const val=id=>Number(document.getElementById(id).value)||0;
+function save(){const d={};fields.forEach(id=>d[id]=document.getElementById(id).value);localStorage.setItem('mwf-inputs',JSON.stringify(d));}
+function load(){try{const d=JSON.parse(localStorage.getItem('mwf-inputs')||'{}');for(const [k,v] of Object.entries(d)){if(document.getElementById(k))document.getElementById(k).value=v}}catch(e){}}
+function clearSaved(){localStorage.removeItem('mwf-inputs');location.reload();}
+function take(balance,need){const t=Math.min(balance,need);return [balance-t,need-t]}
+function run(){save();let age=val('age'),years=Math.max(1,Math.min(50,val('years'))),p=val('pension'),i=val('isa'),c=val('cash'),sp=val('spend');const home=val('home'),spouseSP0=val('spouseSP'),spousePP0=val('spousePP'),userSP0=val('userSP'),spAge=val('spAge'),other0=val('otherIncome'),g=val('growth')/100,f=val('fees')/100,inf=val('inflation')/100,cr=val('cashRate')/100,tax=val('tax')/100,order=document.getElementById('order').value.split('-');let spouseSP=spouseSP0,spousePP=spousePP0,userSP=userSP0,other=other0,depleted=null;const rows=[];const start=p+i+c;
+for(let y=0;y<=years;y++){const income=spouseSP+spousePP+other+(age>=spAge?userSP:0),total=p+i+c;rows.push({y,age,sp,income,c,i,p,total,totalHome:total+home});if(y===years)break;p*=Math.max(0,1+g-f);i*=Math.max(0,1+g-f);c*=Math.max(0,1+cr);let need=Math.max(0,sp-income);for(const a of order){if(need<=0)break;if(a==='cash'){[c,need]=take(c,need)}if(a==='isa'){[i,need]=take(i,need)}if(a==='pension'){const gross=need/Math.max(.01,1-tax),t=Math.min(p,gross);p-=t;need-=t*(1-tax)}}if(need>1&&depleted===null)depleted=age+1;age++;sp*=1+inf;spouseSP*=1+inf;spousePP*=1+inf;userSP*=1+inf;other*=1+inf;}
+document.getElementById('startWealth').textContent=money(start);document.getElementById('endWealth').textContent=money(rows.at(-1).total);document.getElementById('runout').textContent=depleted===null?'Not within forecast':'Age '+depleted;document.getElementById('summary').textContent=`Assumes ${(g*100).toFixed(1)}% gross investment growth, ${(f*100).toFixed(1)}% fees and ${(inf*100).toFixed(1)}% inflation. Simplified tax model; not financial advice.`;document.getElementById('tbody').innerHTML=rows.map(r=>`<tr><td>${r.y===0?'Now':r.y}</td><td>${r.age}</td><td>${money(r.sp)}</td><td>${money(r.income)}</td><td>${money(r.c)}</td><td>${money(r.i)}</td><td>${money(r.p)}</td><td><b>${money(r.total)}</b></td></tr>`).join('');}
+fields.forEach(id=>document.getElementById(id).addEventListener('change',run));load();run();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
+</script>
+</body></html>
