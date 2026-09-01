@@ -3,60 +3,179 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0f2748" />
+<meta name="theme-color" content="#F8C62D" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="apple-touch-icon" href="icon-180.png" />
 <title>Otium</title>
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#64748b;--line:#dbe3ef;--accent:#1f5fbf}
-*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-header{padding:calc(22px + env(safe-area-inset-top)) 18px 22px;background:#0f2748;color:#fff} header h1{margin:0 0 5px;font-size:27px} header p{margin:0;color:#d9e5f5}
-main{max-width:900px;margin:16px auto;padding:0 14px calc(30px + env(safe-area-inset-bottom))}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(15,39,72,.04)}
-h2{margin:0 0 12px;font-size:19px} h3{margin:16px 0 8px;font-size:15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
-input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;background:#fff}button{border:0;border-radius:10px;padding:11px 14px;background:var(--accent);color:#fff;font-weight:600;font-size:15px}.secondary{background:#e8eef8;color:#153b72}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.kpi{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.kpi .v{font-size:21px;font-weight:700}.kpi .l{font-size:11px;color:var(--muted);margin-top:3px}.note{font-size:12px;color:var(--muted);line-height:1.45}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;max-height:470px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px 9px;border-bottom:1px solid #edf2f7;text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{position:sticky;top:0;background:#f8fafc}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr}}
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#64748b;--line:#dbe3ef;--accent:#12366A;--gold:#F8C62D;--soft:#eef4fb}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{padding:calc(18px + env(safe-area-inset-top)) 18px 20px;background:var(--gold);color:#102A56}.brand{max-width:980px;margin:auto;display:flex;align-items:center;gap:12px}.brand img{width:58px;height:58px;border-radius:50%;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,.18);border:3px solid rgba(255,255,255,.95)}header h1{margin:0 0 3px;font-size:28px}header p{margin:0;color:#102A56}
+main{max-width:980px;margin:16px auto;padding:0 14px calc(30px + env(safe-area-inset-bottom))}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(15,39,72,.04)}
+h2{margin:0 0 12px;font-size:19px}h3{margin:18px 0 9px;font-size:15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
+input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;background:#fff;color:var(--ink)}button{border:0;border-radius:10px;padding:12px 15px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;cursor:pointer}.secondary{background:#e8eef8;color:#153b72}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.kpi{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.kpi .v{font-size:20px;font-weight:750}.kpi .l{font-size:11px;color:var(--muted);margin-top:3px}.note{font-size:12px;color:var(--muted);line-height:1.5}.total-strip{margin-top:12px;padding:12px;border-radius:11px;background:var(--soft);display:flex;justify-content:space-between;gap:12px;font-weight:700}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;max-height:520px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px 9px;border-bottom:1px solid #edf2f7;text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{position:sticky;top:0;background:#f8fafc;z-index:1}.strategy{padding:12px;border-radius:11px;background:#f8fafc;border:1px solid var(--line);font-size:12px;line-height:1.5}.status{margin-top:10px;font-size:12px;font-weight:600;color:#24528b;min-height:18px}
+@media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.brand img{width:50px;height:50px}header h1{font-size:25px}.table-wrap{max-height:430px}}
+@media(max-width:420px){.kpis{grid-template-columns:1fr}.actions button{width:100%}}
 </style>
 </head>
 <body>
-<header><h1>Otium</h1><p>30-year personal investment projection</p></header>
+<header><div class="brand"><img src="icon-180.png" alt="Otium icon" onerror="this.style.display='none'"><div><h1>Otium</h1><p>Personal retirement & investment forecast</p></div></div></header>
 <main>
-<section class="card"><h2>Your inputs</h2><p class="note">Your entries are saved only in this browser on this device using local storage. This page starts with example figures, not your real holdings.</p>
-<h3>Current position</h3><div class="grid">
-<div><label>Your age</label><input id="age" type="number" value="63"></div><div><label>Forecast years</label><input id="years" type="number" value="30"></div>
-<div><label>Pension investments (£)</label><input id="pension" type="number" value="800000"></div><div><label>ISAs + Unit Trusts (£)</label><input id="isa" type="number" value="150000"></div>
-<div><label>Cash / savings (£)</label><input id="cash" type="number" value="50000"></div><div><label>Home value (£, optional)</label><input id="home" type="number" value="400000"></div></div>
+<section class="card">
+<h2>Your inputs</h2>
+<p class="note">Your figures are saved only in this browser on this device. Update any balance below, then press <b>Calculate forecast</b>.</p>
+
+<h3>Current position</h3>
+<div class="grid">
+<div><label>Your age</label><input id="age" type="number" value="63"></div>
+<div><label>Forecast years</label><input id="years" type="number" value="30"></div>
+<div><label>Home value (£, excluded from investment total)</label><input id="home" type="number" value="400000"></div>
+<div><label>Forecast start year</label><input id="startYear" type="number" value="2026"></div>
+</div>
+
+<h3>Pensions</h3>
+<div class="grid">
+<div><label>Aviva non-crystallised pension (£)</label><input id="avivaUncryst" type="number" value="756367"></div>
+<div><label>Aviva crystallised pension (£)</label><input id="avivaCryst" type="number" value="62069"></div>
+<div><label>St James's Place crystallised pension (£)</label><input id="sjpCryst" type="number" value="31564"></div>
+<div><label>UFPLS tranche size (£)</label><input id="ufplsTranche" type="number" value="100000"></div>
+</div>
+
+<h3>ISAs, Unit Trust & cash</h3>
+<div class="grid">
+<div><label>Your Cash ISA (£)</label><input id="userCashIsa" type="number" value="0"></div>
+<div><label>Your Stocks & Shares ISA (£)</label><input id="userSsIsa" type="number" value="0"></div>
+<div><label>Heather Cash ISA (£)</label><input id="heatherCashIsa" type="number" value="0"></div>
+<div><label>Heather Aviva Stocks & Shares ISA (£)</label><input id="heatherSsIsa" type="number" value="22170"></div>
+<div><label>Unit Trust (£)</label><input id="unitTrust" type="number" value="0"></div>
+<div><label>Cash / fixed-term savings (£)</label><input id="cashSavings" type="number" value="0"></div>
+</div>
+<div class="total-strip"><span>Total investments</span><span id="inputTotal">—</span></div>
+<p class="note">The pension figures above total about £850,000. I have inserted the known Heather Aviva ISA figure; enter the latest balances for the remaining ISA, Unit Trust and cash accounts.</p>
+
 <h3>Income & spending</h3>
-<p class="note">Set up to four retirement spending stages. Spending figures are in today's money and are increased by the inflation assumption during the forecast.</p>
+<p class="note">Spending is entered in today's money and increased annually by the inflation assumption.</p>
 <div class="grid">
 <div><label>Stage 1 spending (£/yr)</label><input id="spend1" type="number" value="80000"></div><div><label>Stage 1 until age</label><input id="spendAge1" type="number" value="75"></div>
-<div><label>Stage 2 spending (£/yr)</label><input id="spend2" type="number" value="70000"></div><div><label>Stage 2 until age</label><input id="spendAge2" type="number" value="80"></div>
-<div><label>Stage 3 spending (£/yr)</label><input id="spend3" type="number" value="60000"></div><div><label>Stage 3 until age</label><input id="spendAge3" type="number" value="85"></div>
-<div><label>Stage 4 spending (£/yr, thereafter)</label><input id="spend4" type="number" value="50000"></div><div><label>Stage 4</label><input type="text" value="Thereafter" disabled></div>
-<div><label>Spouse State Pension (£/yr)</label><input id="spouseSP" type="number" value="12000"></div>
-<div><label>Spouse private pension (£/yr)</label><input id="spousePP" type="number" value="3000"></div><div><label>Your State Pension (£/yr)</label><input id="userSP" type="number" value="12000"></div>
-<div><label>Your State Pension starts at age</label><input id="spAge" type="number" value="67"></div><div><label>Other annual income (£)</label><input id="otherIncome" type="number" value="0"></div></div>
-<h3>Assumptions</h3><div class="grid">
-<div><label>Gross investment growth (%)</label><input id="growth" type="number" step=".1" value="5"></div><div><label>Annual fees (%)</label><input id="fees" type="number" step=".1" value="1"></div>
-<div><label>Inflation (%)</label><input id="inflation" type="number" step=".1" value="3"></div><div><label>Cash interest (%)</label><input id="cashRate" type="number" step=".1" value="3"></div>
-<div><label>Effective tax on pension withdrawals (%)</label><input id="tax" type="number" step=".1" value="15"></div><div><label>Withdrawal order</label><select id="order"><option value="cash-isa-pension">Cash → ISA/UT → Pension</option><option value="isa-cash-pension">ISA/UT → Cash → Pension</option><option value="pension-isa-cash">Pension → ISA/UT → Cash</option></select></div></div>
-<div class="actions"><button onclick="run()">Calculate</button><button class="secondary" onclick="clearSaved()">Clear saved data</button></div></section>
-<section class="card"><h2>Forecast summary</h2><div class="kpis"><div class="kpi"><div class="v" id="startWealth">—</div><div class="l">Starting financial assets</div></div><div class="kpi"><div class="v" id="endWealth">—</div><div class="l">Assets at end</div></div><div class="kpi"><div class="v" id="runout">—</div><div class="l">Projected depletion age</div></div></div><p id="summary" class="note"></p></section>
-<section class="card"><h2>Year-by-year projection</h2><div class="table-wrap"><table><thead><tr><th>Year</th><th>Age</th><th>Spending</th><th>Income</th><th>Cash</th><th>ISA/UT</th><th>Pension</th><th>Total</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
+<div><label>Stage 2 spending (£/yr)</label><input id="spend2" type="number" value="55000"></div><div><label>Stage 2 until age</label><input id="spendAge2" type="number" value="80"></div>
+<div><label>Stage 3 spending (£/yr)</label><input id="spend3" type="number" value="40000"></div><div><label>Stage 3 until age</label><input id="spendAge3" type="number" value="85"></div>
+<div><label>Stage 4 spending (£/yr, thereafter)</label><input id="spend4" type="number" value="40000"></div><div><label>Stage 4</label><input type="text" value="Thereafter" disabled></div>
+<div><label>Heather State Pension (£/yr)</label><input id="spouseSP" type="number" value="12548"></div>
+<div><label>Heather private pension (£/yr)</label><input id="spousePP" type="number" value="3000"></div>
+<div><label>Your State Pension (£/yr at start)</label><input id="userSP" type="number" value="12887"></div>
+<div><label>Your State Pension starts at age</label><input id="spAge" type="number" value="67"></div>
+<div><label>Other annual income (£)</label><input id="otherIncome" type="number" value="0"></div>
+<div><label>State Pension annual increase (%)</label><input id="spIncrease" type="number" step=".1" value="2.5"></div>
+</div>
+
+<h3>Withdrawal strategy</h3>
+<div class="strategy">Otium first uses up to £12,000 a year from the existing crystallised pensions, then up to £6,000 a year from the Unit Trust, then cash/fixed-term savings and ISAs. Once those sources are insufficient it draws from the non-crystallised pension using £100,000 UFPLS tranches: 25% is treated as tax-free and 75% as taxable. The model prefers the first £12,000 of taxable UFPLS withdrawals each year, then tax-free cash, and uses further taxable pension withdrawals if required to meet spending.</div>
+<div class="grid" style="margin-top:11px">
+<div><label>Planned crystallised pension withdrawal (£/yr)</label><input id="crystAnnual" type="number" value="12000"></div>
+<div><label>Planned Unit Trust withdrawal (£/yr)</label><input id="utAnnual" type="number" value="6000"></div>
+<div><label>Preferred taxable UFPLS withdrawal (£/yr)</label><input id="ufplsTaxableAnnual" type="number" value="12000"></div>
+<div><label>Effective tax on taxable pension withdrawals (%)</label><input id="tax" type="number" step=".1" value="15"></div>
+</div>
+
+<h3>Forecast assumptions</h3>
+<div class="grid">
+<div><label>Gross investment growth (%)</label><input id="growth" type="number" step=".1" value="5"></div>
+<div><label>Annual investment fees (%)</label><input id="fees" type="number" step=".1" value="1.3"></div>
+<div><label>Inflation (%)</label><input id="inflation" type="number" step=".1" value="3"></div>
+<div><label>Cash / Cash ISA interest (%)</label><input id="cashRate" type="number" step=".1" value="3"></div>
+</div>
+<div class="actions"><button id="calculateBtn" type="button">Calculate forecast</button><button id="clearBtn" class="secondary" type="button">Clear saved data</button></div>
+<div id="status" class="status"></div>
+</section>
+
+<section class="card"><h2>Forecast summary</h2>
+<div class="kpis">
+<div class="kpi"><div class="v" id="startWealth">—</div><div class="l">Starting financial assets</div></div>
+<div class="kpi"><div class="v" id="endWealth">—</div><div class="l">Assets at end</div></div>
+<div class="kpi"><div class="v" id="endWithHome">—</div><div class="l">End assets + home</div></div>
+<div class="kpi"><div class="v" id="runout">—</div><div class="l">Projected depletion age</div></div>
+</div><p id="summary" class="note"></p></section>
+
+<section class="card"><h2>Year-by-year projection</h2><div class="table-wrap"><table><thead><tr><th>Year</th><th>Age</th><th>Spending</th><th>Regular income</th><th>Cash/ISA/UT</th><th>Crystallised</th><th>Non-crystallised</th><th>Total</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
 </main>
 <script>
-const fields=['age','years','pension','isa','cash','home','spend1','spendAge1','spend2','spendAge2','spend3','spendAge3','spend4','spouseSP','spousePP','userSP','spAge','otherIncome','growth','fees','inflation','cashRate','tax','order'];
-const money=x=>new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:0}).format(x);
-const val=id=>Number(document.getElementById(id).value)||0;
-function save(){const d={};fields.forEach(id=>d[id]=document.getElementById(id).value);localStorage.setItem('mwf-inputs',JSON.stringify(d));}
-function load(){try{const d=JSON.parse(localStorage.getItem('mwf-inputs')||'{}');for(const [k,v] of Object.entries(d)){if(document.getElementById(k))document.getElementById(k).value=v}}catch(e){}}
-function clearSaved(){localStorage.removeItem('mwf-inputs');location.reload();}
-function take(balance,need){const t=Math.min(balance,need);return [balance-t,need-t]}
-function run(){save();let age=val('age'),years=Math.max(1,Math.min(50,val('years'))),p=val('pension'),i=val('isa'),c=val('cash');const startAge=age,home=val('home'),spouseSP0=val('spouseSP'),spousePP0=val('spousePP'),userSP0=val('userSP'),spAge=val('spAge'),other0=val('otherIncome'),g=val('growth')/100,f=val('fees')/100,inf=val('inflation')/100,cr=val('cashRate')/100,tax=val('tax')/100,order=document.getElementById('order').value.split('-');const spend1=val('spend1'),spendAge1=val('spendAge1'),spend2=val('spend2'),spendAge2=val('spendAge2'),spend3=val('spend3'),spendAge3=val('spendAge3'),spend4=val('spend4');let spouseSP=spouseSP0,spousePP=spousePP0,userSP=userSP0,other=other0,depleted=null;const rows=[];const start=p+i+c;
-function baseSpendForAge(a){if(a<spendAge1)return spend1;if(a<spendAge2)return spend2;if(a<spendAge3)return spend3;return spend4;}
-for(let y=0;y<=years;y++){const sp=baseSpendForAge(age)*Math.pow(1+inf,y),income=spouseSP+spousePP+other+(age>=spAge?userSP:0),total=p+i+c;rows.push({y,age,sp,income,c,i,p,total,totalHome:total+home});if(y===years)break;p*=Math.max(0,1+g-f);i*=Math.max(0,1+g-f);c*=Math.max(0,1+cr);let need=Math.max(0,sp-income);for(const a of order){if(need<=0)break;if(a==='cash'){[c,need]=take(c,need)}if(a==='isa'){[i,need]=take(i,need)}if(a==='pension'){const gross=need/Math.max(.01,1-tax),t=Math.min(p,gross);p-=t;need-=t*(1-tax)}}if(need>1&&depleted===null)depleted=age+1;age++;spouseSP*=1+inf;spousePP*=1+inf;userSP*=1+inf;other*=1+inf;}
-document.getElementById('startWealth').textContent=money(start);document.getElementById('endWealth').textContent=money(rows.at(-1).total);document.getElementById('runout').textContent=depleted===null?'Not within forecast':'Age '+depleted;document.getElementById('summary').textContent=`Assumes ${(g*100).toFixed(1)}% gross investment growth, ${(f*100).toFixed(1)}% fees and ${(inf*100).toFixed(1)}% inflation. Spending follows your four retirement stages and is inflation-linked from today's money. Simplified tax model; not financial advice.`;document.getElementById('tbody').innerHTML=rows.map(r=>`<tr><td>${r.y===0?'Now':r.y}</td><td>${r.age}</td><td>${money(r.sp)}</td><td>${money(r.income)}</td><td>${money(r.c)}</td><td>${money(r.i)}</td><td>${money(r.p)}</td><td><b>${money(r.total)}</b></td></tr>`).join('');}
-fields.forEach(id=>document.getElementById(id).addEventListener('change',run));load();run();
+'use strict';
+const fields=['age','years','home','startYear','avivaUncryst','avivaCryst','sjpCryst','ufplsTranche','userCashIsa','userSsIsa','heatherCashIsa','heatherSsIsa','unitTrust','cashSavings','spend1','spendAge1','spend2','spendAge2','spend3','spendAge3','spend4','spouseSP','spousePP','userSP','spAge','otherIncome','spIncrease','crystAnnual','utAnnual','ufplsTaxableAnnual','tax','growth','fees','inflation','cashRate'];
+const $=id=>document.getElementById(id);
+const val=id=>Number($(id)?.value)||0;
+const money=x=>new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:0}).format(Number.isFinite(x)?x:0);
+function save(){try{const d={};fields.forEach(id=>d[id]=$(id).value);localStorage.setItem('otium-v16-inputs',JSON.stringify(d));}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem('otium-v16-inputs')||'{}');Object.entries(d).forEach(([k,v])=>{if($(k))$(k).value=v;});}catch(e){}}
+function clearSaved(){try{localStorage.removeItem('otium-v16-inputs');}catch(e){} location.reload();}
+function baseSpendForAge(a,s1,a1,s2,a2,s3,a3,s4){if(a<a1)return s1;if(a<a2)return s2;if(a<a3)return s3;return s4;}
+function take(obj,key,need,max=Infinity){const amount=Math.min(Math.max(0,obj[key]),Math.max(0,need),Math.max(0,max));obj[key]-=amount;return {amount,need:need-amount};}
+function totalLiquid(b){return b.userCashIsa+b.userSsIsa+b.heatherCashIsa+b.heatherSsIsa+b.unitTrust+b.cashSavings;}
+function totalCryst(b){return b.avivaCryst+b.sjpCryst+b.ufplsTaxFree+b.ufplsTaxable;}
+function totalAll(b){return totalLiquid(b)+totalCryst(b)+b.avivaUncryst;}
+function updateInputTotal(){const t=val('avivaUncryst')+val('avivaCryst')+val('sjpCryst')+val('userCashIsa')+val('userSsIsa')+val('heatherCashIsa')+val('heatherSsIsa')+val('unitTrust')+val('cashSavings');$('inputTotal').textContent=money(t);}
+function crystalliseTranche(b,tranche){if(b.avivaUncryst<=0)return false;const x=Math.min(b.avivaUncryst,Math.max(1,tranche));b.avivaUncryst-=x;b.ufplsTaxFree+=x*.25;b.ufplsTaxable+=x*.75;return true;}
+function withdrawNetFromTaxable(b,key,need,tax,maxNet=Infinity){if(need<=0||b[key]<=0)return need;const netRate=Math.max(.01,1-tax);const targetNet=Math.min(need,maxNet);const gross=Math.min(b[key],targetNet/netRate);b[key]-=gross;return need-gross*netRate;}
+function run(){
+try{
+save();updateInputTotal();
+let age=val('age');const startAge=age,years=Math.max(1,Math.min(50,val('years'))),startYear=val('startYear')||new Date().getFullYear(),home=val('home');
+const g=val('growth')/100,f=val('fees')/100,inf=val('inflation')/100,cr=val('cashRate')/100,tax=Math.min(.95,Math.max(0,val('tax')/100)),spInc=val('spIncrease')/100;
+const s1=val('spend1'),a1=val('spendAge1'),s2=val('spend2'),a2=val('spendAge2'),s3=val('spend3'),a3=val('spendAge3'),s4=val('spend4');
+const spouseSP0=val('spouseSP'),spousePP0=val('spousePP'),userSP0=val('userSP'),spAge=val('spAge'),other0=val('otherIncome');
+const crystAnnual=val('crystAnnual'),utAnnual=val('utAnnual'),ufplsTaxableAnnual=val('ufplsTaxableAnnual'),tranche=val('ufplsTranche');
+let b={avivaUncryst:val('avivaUncryst'),avivaCryst:val('avivaCryst'),sjpCryst:val('sjpCryst'),ufplsTaxFree:0,ufplsTaxable:0,userCashIsa:val('userCashIsa'),userSsIsa:val('userSsIsa'),heatherCashIsa:val('heatherCashIsa'),heatherSsIsa:val('heatherSsIsa'),unitTrust:val('unitTrust'),cashSavings:val('cashSavings')};
+const start=totalAll(b);let depleted=null;const rows=[];
+for(let y=0;y<=years;y++){
+  const currentYear=startYear+y;
+  const spend=baseSpendForAge(age,s1,a1,s2,a2,s3,a3,s4)*Math.pow(1+inf,y);
+  const spouseSP=spouseSP0*Math.pow(1+spInc,y), spousePP=spousePP0*Math.pow(1+inf,y), userSP=userSP0*Math.pow(1+spInc,y), other=other0*Math.pow(1+inf,y);
+  const regularIncome=spouseSP+spousePP+other+(age>=spAge?userSP:0);
+  const total=totalAll(b);
+  rows.push({y,currentYear,age,spend,regularIncome,liquid:totalLiquid(b),cryst:totalCryst(b),uncryst:b.avivaUncryst,total});
+  if(y===years)break;
+
+  const investFactor=Math.max(0,1+g-f), cashFactor=Math.max(0,1+cr);
+  b.avivaUncryst*=investFactor;b.avivaCryst*=investFactor;b.sjpCryst*=investFactor;b.ufplsTaxFree*=investFactor;b.ufplsTaxable*=investFactor;
+  b.userSsIsa*=investFactor;b.heatherSsIsa*=investFactor;b.unitTrust*=investFactor;
+  b.userCashIsa*=cashFactor;b.heatherCashIsa*=cashFactor;b.cashSavings*=cashFactor;
+
+  let need=Math.max(0,spend-regularIncome);
+  let remainingCrystPlan=crystAnnual;
+  let r=take(b,'avivaCryst',need,remainingCrystPlan);need=r.need;remainingCrystPlan-=r.amount;
+  r=take(b,'sjpCryst',need,remainingCrystPlan);need=r.need;
+  r=take(b,'unitTrust',need,utAnnual);need=r.need;
+  r=take(b,'cashSavings',need);need=r.need;
+  r=take(b,'userCashIsa',need);need=r.need;
+  r=take(b,'heatherCashIsa',need);need=r.need;
+  r=take(b,'userSsIsa',need);need=r.need;
+  r=take(b,'heatherSsIsa',need);need=r.need;
+  r=take(b,'unitTrust',need);need=r.need;
+  r=take(b,'avivaCryst',need);need=r.need;
+  r=take(b,'sjpCryst',need);need=r.need;
+
+  let preferredTaxNet=ufplsTaxableAnnual;
+  while(need>1 && (b.avivaUncryst>0 || b.ufplsTaxFree>0 || b.ufplsTaxable>0)){
+    if(b.ufplsTaxFree<=0 && b.ufplsTaxable<=0 && !crystalliseTranche(b,tranche))break;
+    if(preferredTaxNet>0 && b.ufplsTaxable>0){const before=need;need=withdrawNetFromTaxable(b,'ufplsTaxable',need,tax,preferredTaxNet);preferredTaxNet=Math.max(0,preferredTaxNet-(before-need));}
+    r=take(b,'ufplsTaxFree',need);need=r.need;
+    if(need>1 && b.ufplsTaxable>0)need=withdrawNetFromTaxable(b,'ufplsTaxable',need,tax);
+    if(need>1 && b.ufplsTaxFree<=0 && b.ufplsTaxable<=0 && b.avivaUncryst>0)continue;
+    if(need>1 && b.avivaUncryst<=0 && b.ufplsTaxFree<=0 && b.ufplsTaxable<=0)break;
+  }
+  if(need>1 && depleted===null)depleted=age+1;
+  age++;
+}
+$('startWealth').textContent=money(start);$('endWealth').textContent=money(rows[rows.length-1].total);$('endWithHome').textContent=money(rows[rows.length-1].total+home);$('runout').textContent=depleted===null?'Not within forecast':'Age '+depleted;
+$('summary').textContent=`Forecast from age ${startAge} assumes ${(g*100).toFixed(1)}% gross investment growth, ${(f*100).toFixed(1)}% annual fees, ${(inf*100).toFixed(1)}% inflation and ${(spInc*100).toFixed(1)}% annual State Pension increases. Home value is excluded from the investment total. Pension tax is simplified and this is a planning model, not financial advice.`;
+$('tbody').innerHTML=rows.map(r=>`<tr><td>${r.y===0?'Now':r.currentYear}</td><td>${r.age}</td><td>${money(r.spend)}</td><td>${money(r.regularIncome)}</td><td>${money(r.liquid)}</td><td>${money(r.cryst)}</td><td>${money(r.uncryst)}</td><td><b>${money(r.total)}</b></td></tr>`).join('');
+$('status').textContent='Forecast updated.';
+}catch(err){console.error(err);$('status').textContent='There was a problem calculating the forecast. Please check the figures entered.';}
+}
+fields.forEach(id=>{const el=$(id);if(el){el.addEventListener('input',updateInputTotal);el.addEventListener('change',run);}});
+$('calculateBtn').addEventListener('click',run);$('clearBtn').addEventListener('click',clearSaved);
+load();updateInputTotal();run();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
 </script>
-</body></html>
+</body>
+</html>
