@@ -1,6 +1,6 @@
 {
-  "name": "My Wealth Forecast",
-  "short_name": "Wealth Forecast",
+  "name": "Otium",
+  "short_name": "Otium",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#f5f7fb",
