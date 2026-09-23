@@ -10,19 +10,19 @@
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#64748b;--line:#dbe3ef;--accent:#12366A;--gold:#F8C62D;--soft:#eef4fb}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-header{padding:calc(18px + env(safe-area-inset-top)) 18px 20px;background:var(--gold);color:#102A56}.brand{max-width:980px;margin:auto;display:flex;align-items:center;gap:12px}.brand img{width:58px;height:58px;border-radius:50%;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,.18);border:3px solid rgba(255,255,255,.95)}header h1{margin:0 0 3px;font-size:28px}header p{margin:0;color:#102A56}
+header{padding:calc(18px + env(safe-area-inset-top)) 18px 20px;background:var(--gold);color:#102A56}.brand{max-width:980px;margin:auto;display:flex;align-items:center;gap:12px}.brand img,.otium-sunset{width:58px;height:58px;border-radius:50%;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,.18);border:3px solid rgba(255,255,255,.95);display:block;flex:0 0 58px;overflow:hidden}.otium-sunset svg{display:block;width:100%;height:100%}header h1{margin:0 0 3px;font-size:28px}header p{margin:0;color:#102A56}
 main{max-width:980px;margin:16px auto;padding:0 14px calc(30px + env(safe-area-inset-bottom))}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(15,39,72,.04)}
 h2{margin:0 0 12px;font-size:19px}h3{margin:18px 0 9px;font-size:15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
 input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;background:#fff;color:var(--ink)}button{border:0;border-radius:10px;padding:12px 15px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;cursor:pointer}.secondary{background:#e8eef8;color:#153b72}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.kpi{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.kpi .v{font-size:20px;font-weight:750}.kpi .l{font-size:11px;color:var(--muted);margin-top:3px}.note{font-size:12px;color:var(--muted);line-height:1.5}.total-strip{margin-top:12px;padding:12px;border-radius:11px;background:var(--soft);display:flex;justify-content:space-between;gap:12px;font-weight:700}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;max-height:520px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px 9px;border-bottom:1px solid #edf2f7;text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{position:sticky;top:0;background:#f8fafc;z-index:1}.strategy{padding:12px;border-radius:11px;background:#f8fafc;border:1px solid var(--line);font-size:12px;line-height:1.5}.status{margin-top:10px;font-size:12px;font-weight:600;color:#24528b;min-height:18px}
 
 .chart-card{overflow:hidden}.chart-legend{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 12px;font-size:12px;color:var(--muted)}.legend-item{display:flex;align-items:center;gap:6px}.swatch{width:12px;height:12px;border-radius:3px;display:inline-block}.swatch.cryst{background:#D92D20}.swatch.uncryst{background:#F97066}.swatch.other{background:#76A9DC}.swatch.state{background:#E09F3E}.chart-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:#fff}.chart-inner{min-width:900px;padding:14px 12px 8px}.chart-svg{width:100%;height:390px;display:block}.chart-axis{stroke:#94a3b8;stroke-width:1}.chart-grid{stroke:#e8eef5;stroke-width:1}.chart-label{fill:#64748b;font-size:11px}.chart-line{fill:none;stroke:#E09F3E;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.chart-dot{fill:#E09F3E}.chart-note{margin-top:9px;font-size:11px;color:var(--muted)}.chart-scroll{position:relative}.chart-bar{cursor:pointer}.chart-bar:focus rect,.chart-bar.selected rect{stroke:#172033;stroke-width:2}.chart-values{margin:10px 0 4px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#f8fafc;font-size:12px;line-height:1.55;color:var(--ink)}.chart-values b{font-size:13px}.chart-values .value-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 14px;margin-top:4px}@media(max-width:520px){.chart-values .value-grid{grid-template-columns:1fr}}
-@media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.brand img{width:50px;height:50px}header h1{font-size:25px}.table-wrap{max-height:430px}}
+@media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.brand img,.otium-sunset{width:50px;height:50px;flex-basis:50px}header h1{font-size:25px}.table-wrap{max-height:430px}}
 @media(max-width:420px){.kpis{grid-template-columns:1fr}.actions button{width:100%}}
 .chart-static-values{margin-top:10px}.chart-static-values .age-card{display:none;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#f8fafc;font-size:12px;line-height:1.55}.chart-static-values .age-card:target{display:block}.chart-static-values .age-card:first-child{display:block}.chart-static-values:has(.age-card:target) .age-card:first-child:not(:target){display:none}.chart-link{outline:none}.chart-link:focus rect{stroke:#172033;stroke-width:2}.tap-note{font-weight:700;color:var(--ink)}</style>
 </head>
 <body>
-<header><div class="brand"><img src="icon-180.png" alt="Otium icon" onerror="this.style.display='none'"><div><h1>Otium</h1><p>Personal retirement & investment forecast</p></div></div></header>
+<header><div class="brand"><span class="otium-sunset" aria-label="Otium sunset icon"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb52e"/><stop offset="1" stop-color="#f26a2e"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#sky)"/><circle cx="32" cy="29" r="12" fill="#ffe07a"/><path d="M7 40 Q18 35 30 40 T57 40 V58 H7Z" fill="#176b87"/><path d="M7 47 Q19 42 31 47 T57 47 V58 H7Z" fill="#0b4d66"/></svg></span><div><h1>Otium</h1><p>Personal retirement & investment forecast</p></div></div></header>
 <main>
 <section class="card">
 <h2>Your inputs</h2>
@@ -80,6 +80,13 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div><label>Effective tax on taxable pension withdrawals (%)</label><input id="tax" type="number" step=".1" value="15"></div>
 </div>
 
+<h3>Gifting</h3>
+<p class="note">Enter a one-off gift, the age at which it is made, and the investment pot it comes from. The gift is deducted from that pot before that year's spending and is included in the forecast and depletion age.</p>
+<div class="grid">
+<div><label>Gift amount (£)</label><input id="giftAmount" type="number" min="0" step="1000" value="0"></div>
+<div><label>Age when gift is made</label><input id="giftAge" type="number" min="0" value="65"></div>
+<div><label>Gift from (asset class)</label><select id="giftSource"><option value="cashClass">Cash & cash ISAs</option><option value="investmentsClass">Unit Trust & Stocks/Shares ISAs</option><option value="unitTrust">Unit Trust only</option><option value="crystallised">Crystallised pensions</option><option value="avivaUncryst">Non-crystallised Aviva pension</option><option value="any">Across investments as needed</option></select></div>
+</div>
 <h3>Forecast assumptions</h3>
 <div class="grid">
 <div><label>Gross investment growth (%)</label><input id="growth" type="number" step=".1" value="5"></div>
@@ -105,7 +112,7 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 </main>
 <script>
 'use strict';
-const fields=['age','years','home','startYear','avivaUncryst','avivaCryst','sjpCryst','ufplsTranche','userCashIsa','userSsIsa','heatherCashIsa','heatherSsIsa','unitTrust','cashSavings','spend1','spendAge1','spend2','spendAge2','spend3','spendAge3','spend4','spouseSP','spousePP','userSP','spAge','otherIncome','spIncrease','crystAnnual','utAnnual','ufplsTaxableAnnual','tax','growth','fees','inflation','cashRate'];
+const fields=['age','years','home','startYear','avivaUncryst','avivaCryst','sjpCryst','ufplsTranche','userCashIsa','userSsIsa','heatherCashIsa','heatherSsIsa','unitTrust','cashSavings','spend1','spendAge1','spend2','spendAge2','spend3','spendAge3','spend4','spouseSP','spousePP','userSP','spAge','otherIncome','spIncrease','crystAnnual','utAnnual','ufplsTaxableAnnual','tax','growth','fees','inflation','cashRate','giftAmount','giftAge','giftSource'];
 const $=id=>document.getElementById(id);
 const val=id=>Number($(id)?.value)||0;
 const money=x=>new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:0}).format(Number.isFinite(x)?x:0);
@@ -123,6 +130,18 @@ function take(obj,key,need,max=Infinity){const amount=Math.min(Math.max(0,obj[ke
 function totalLiquid(b){return b.userCashIsa+b.userSsIsa+b.heatherCashIsa+b.heatherSsIsa+b.unitTrust+b.cashSavings;}
 function totalCryst(b){return b.avivaCryst+b.sjpCryst+b.ufplsTaxFree+b.ufplsTaxable;}
 function totalAll(b){return totalLiquid(b)+totalCryst(b)+b.avivaUncryst;}
+function applyGift(b,amount,source){
+ let need=Math.max(0,amount);
+ const takeGift=k=>{if(need<=0)return;const x=Math.min(Math.max(0,Number(b[k])||0),need);b[k]-=x;need-=x;};
+ const groups={
+   cashClass:['cashSavings','userCashIsa','heatherCashIsa'],
+   investmentsClass:['unitTrust','userSsIsa','heatherSsIsa'],
+   crystallised:['avivaCryst','sjpCryst','ufplsTaxFree','ufplsTaxable'],
+   any:['cashSavings','userCashIsa','heatherCashIsa','unitTrust','userSsIsa','heatherSsIsa','avivaCryst','sjpCryst','ufplsTaxFree','ufplsTaxable','avivaUncryst']
+ };
+ (groups[source]||[source]).forEach(takeGift);
+ return {applied:amount-need,shortfall:need};
+}
 function updateInputTotal(){const t=val('avivaUncryst')+val('avivaCryst')+val('sjpCryst')+val('userCashIsa')+val('userSsIsa')+val('heatherCashIsa')+val('heatherSsIsa')+val('unitTrust')+val('cashSavings');$('inputTotal').textContent=money(t);}
 function crystalliseTranche(b,tranche){if(b.avivaUncryst<=0)return false;const x=Math.min(b.avivaUncryst,Math.max(1,tranche));b.avivaUncryst-=x;b.ufplsTaxFree+=x*.25;b.ufplsTaxable+=x*.75;return true;}
 function withdrawNetFromTaxable(b,key,need,tax,maxNet=Infinity){if(need<=0||b[key]<=0)return need;const netRate=Math.max(.01,1-tax);const targetNet=Math.min(need,maxNet);const gross=Math.min(b[key],targetNet/netRate);b[key]-=gross;return need-gross*netRate;}
@@ -146,13 +165,13 @@ function renderChart(rows){
  vals.forEach((d,i)=>{if(i%5===0||i===vals.length-1)out+=`<circle class="chart-dot" cx="${x(i)}" cy="${ys(d.state)}" r="3"><title>Age ${d.age}: State Pension ${money(d.state)} per year</title></circle>`;});
  out+=`<text class="chart-label" x="18" y="${m.t+ph/2}" transform="rotate(-90 18 ${m.t+ph/2})" text-anchor="middle">Remaining assets (£)</text><text class="chart-label" x="${m.l+pw/2}" y="${H-2}" text-anchor="middle">Age</text>`;
  svg.innerHTML=out;
- const panel=null;
+ const panel=document.querySelector('.chart-static-values .age-card:first-child');
  const showValues=g=>{
    if(!g)return;
    svg.querySelectorAll('.chart-bar').forEach(x=>x.classList.remove('selected'));
    g.classList.add('selected');
    const age=Number(g.dataset.age),other=Number(g.dataset.other),cryst=Number(g.dataset.cryst),uncryst=Number(g.dataset.uncryst),state=Number(g.dataset.state);
-   panel.innerHTML=`<b>Age ${age}</b><div class="value-grid"><span>Other investments: <strong>${money(other)}</strong></span><span>Crystallised pension: <strong>${money(cryst)}</strong></span><span>Non-crystallised pension: <strong>${money(uncryst)}</strong></span><span>Total assets: <strong>${money(other+cryst+uncryst)}</strong></span><span>State Pension: <strong>${money(state)}/yr</strong></span></div>`;
+   if(panel) panel.innerHTML=`<b>Age ${age}</b><div class="value-grid"><span>Other investments: <strong>${money(other)}</strong></span><span>Crystallised pension: <strong>${money(cryst)}</strong></span><span>Non-crystallised pension: <strong>${money(uncryst)}</strong></span><span>Total assets: <strong>${money(other+cryst+uncryst)}</strong></span><span>State Pension: <strong>${money(state)}/yr</strong></span></div>`;
  };
  svg.querySelectorAll('.chart-bar').forEach(g=>{
    g.addEventListener('click',()=>showValues(g));
@@ -166,15 +185,17 @@ function renderChart(rows){
 function run(){
 try{
 save();updateInputTotal();
-let age=val('age');const startAge=age,years=Math.max(1,Math.min(50,val('years'))),startYear=val('startYear')||new Date().getFullYear(),home=val('home');
+let age=val('age');const startAge=age,years=Math.max(1,Math.min(100,val('years'))),startYear=val('startYear')||new Date().getFullYear(),home=val('home');
 const g=val('growth')/100,f=val('fees')/100,inf=val('inflation')/100,cr=val('cashRate')/100,tax=Math.min(.95,Math.max(0,val('tax')/100)),spInc=val('spIncrease')/100;
 const s1=val('spend1'),a1=val('spendAge1'),s2=val('spend2'),a2=val('spendAge2'),s3=val('spend3'),a3=val('spendAge3'),s4=val('spend4');
 const spouseSP0=val('spouseSP'),spousePP0=val('spousePP'),userSP0=val('userSP'),spAge=val('spAge'),other0=val('otherIncome');
 const crystAnnual=val('crystAnnual'),utAnnual=val('utAnnual'),ufplsTaxableAnnual=val('ufplsTaxableAnnual'),tranche=val('ufplsTranche');
+const giftAmount=Math.max(0,val('giftAmount')),giftAge=val('giftAge'),giftSource=$('giftSource')?.value||'cashClass';let giftApplied=0,giftShortfall=0,giftDone=false;
 let b={avivaUncryst:val('avivaUncryst'),avivaCryst:val('avivaCryst'),sjpCryst:val('sjpCryst'),ufplsTaxFree:0,ufplsTaxable:0,userCashIsa:val('userCashIsa'),userSsIsa:val('userSsIsa'),heatherCashIsa:val('heatherCashIsa'),heatherSsIsa:val('heatherSsIsa'),unitTrust:val('unitTrust'),cashSavings:val('cashSavings')};
 const start=totalAll(b);let depleted=null;const rows=[];
 for(let y=0;y<=years;y++){
   const currentYear=startYear+y;
+  if(!giftDone && giftAmount>0 && age===giftAge){const gr=applyGift(b,giftAmount,giftSource);giftApplied=gr.applied;giftShortfall=gr.shortfall;giftDone=true;}
   const spend=baseSpendForAge(age,s1,a1,s2,a2,s3,a3,s4)*Math.pow(1+inf,y);
   const spouseSP=spouseSP0*Math.pow(1+spInc,y), spousePP=spousePP0*Math.pow(1+inf,y), userSP=userSP0*Math.pow(1+spInc,y), other=other0*Math.pow(1+inf,y);
   const regularIncome=spouseSP+spousePP+other+(age>=spAge?userSP:0);
@@ -214,10 +235,10 @@ for(let y=0;y<=years;y++){
   age++;
 }
 $('startWealth').textContent=money(start);$('endWealth').textContent=money(rows[rows.length-1].total);$('endWithHome').textContent=money(rows[rows.length-1].total+home);$('runout').textContent=depleted===null?'Not within forecast':'Age '+depleted;
-$('summary').textContent=`Forecast from age ${startAge} assumes ${(g*100).toFixed(1)}% gross investment growth, ${(f*100).toFixed(1)}% annual fees, ${(inf*100).toFixed(1)}% inflation and ${(spInc*100).toFixed(1)}% annual State Pension increases. Home value is excluded from the investment total. Pension tax is simplified and this is a planning model, not financial advice.`;
+$('summary').textContent=`Forecast from age ${startAge} assumes ${(g*100).toFixed(1)}% gross investment growth, ${(f*100).toFixed(1)}% annual fees, ${(inf*100).toFixed(1)}% inflation and ${(spInc*100).toFixed(1)}% annual State Pension increases. Home value is excluded from the investment total. Pension tax is simplified and this is a planning model, not financial advice.${giftAmount>0?` Gift requested: ${money(giftAmount)} at age ${giftAge}. Gift actually deducted: ${money(giftApplied)} from the selected asset class.${giftShortfall>0?` WARNING: ${money(giftShortfall)} could not be funded from that asset class at age ${giftAge}.`:''}`:''}`;
 $('tbody').innerHTML=rows.map(r=>`<tr><td>${r.y===0?'Now':r.currentYear}</td><td>${r.age}</td><td>${money(r.spend)}</td><td>${money(r.regularIncome)}</td><td>${money(r.liquid)}</td><td>${money(r.cryst)}</td><td>${money(r.uncryst)}</td><td><b>${money(r.total)}</b></td></tr>`).join('');
 renderChart(rows);
-$('status').textContent='Forecast updated.';
+$('status').textContent=giftShortfall>0?`Forecast updated, but the selected asset class could only fund ${money(giftApplied)} of the ${money(giftAmount)} gift.`:'Forecast updated.';
 }catch(err){console.error(err);$('status').textContent='There was a problem calculating the forecast. Please check the figures entered.';}
 }
 fields.forEach(id=>{const el=$(id);if(el){el.addEventListener('input',updateInputTotal);el.addEventListener('change',run);}});
