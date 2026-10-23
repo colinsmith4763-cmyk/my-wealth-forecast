@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F8C62D" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="apple-touch-icon" href="icon-180.png" />
-<meta name="otium-release" content="2026-10-23-annual-tax-tranches" />
+<meta name="otium-release" content="2026-10-23-strategies-shortfall-yield" />
 
 
 <title>Otium — retirement forecast</title>
@@ -17,7 +17,7 @@ header{padding:calc(18px + env(safe-area-inset-top)) 18px 20px;background:var(--
 main{max-width:980px;margin:16px auto;padding:0 14px calc(30px + env(safe-area-inset-bottom))}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(15,39,72,.04)}
 h2{margin:0 0 12px;font-size:19px}h3{margin:18px 0 9px;font-size:15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
 input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;background:#fff;color:var(--ink)}button{border:0;border-radius:10px;padding:12px 15px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;cursor:pointer}.secondary{background:#e8eef8;color:#153b72}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.kpi{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.kpi .v{font-size:20px;font-weight:750}.kpi .l{font-size:11px;color:var(--muted);margin-top:3px}.note{font-size:12px;color:var(--muted);line-height:1.5}.total-strip{margin-top:12px;padding:12px;border-radius:11px;background:var(--soft);display:flex;justify-content:space-between;gap:12px;font-weight:700}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;max-height:520px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px 9px;border-bottom:1px solid #edf2f7;text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{position:sticky;top:0;background:#f8fafc;z-index:1}.strategy{padding:12px;border-radius:11px;background:#f8fafc;border:1px solid var(--line);font-size:12px;line-height:1.5}.status{margin-top:10px;font-size:12px;font-weight:600;color:#24528b;min-height:18px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.kpi{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.kpi .v{font-size:20px;font-weight:750}.kpi .l{font-size:11px;color:var(--muted);margin-top:3px}.note{font-size:12px;color:var(--muted);line-height:1.5}.total-strip{margin-top:12px;padding:12px;border-radius:11px;background:var(--soft);display:flex;justify-content:space-between;gap:12px;font-weight:700}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;max-height:520px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px 9px;border-bottom:1px solid #edf2f7;text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{position:sticky;top:0;background:#f8fafc;z-index:1}.strategy{padding:12px;border-radius:11px;background:#f8fafc;border:1px solid var(--line);font-size:12px;line-height:1.5}.status{margin-top:10px;font-size:12px;font-weight:600;color:#24528b;min-height:18px}
 
 .chart-card{overflow:hidden}.chart-legend{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 12px;font-size:12px;color:var(--muted)}.legend-item{display:flex;align-items:center;gap:6px}.swatch{width:12px;height:12px;border-radius:3px;display:inline-block}.swatch.cryst{background:#D92D20}.swatch.uncryst{background:#F97066}.swatch.other{background:#76A9DC}.swatch.state{background:#E09F3E}.chart-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:#fff}.chart-inner{min-width:900px;padding:14px 12px 8px}.chart-svg{width:100%;height:390px;display:block}.chart-axis{stroke:#94a3b8;stroke-width:1}.chart-grid{stroke:#e8eef5;stroke-width:1}.chart-label{fill:#64748b;font-size:11px}.chart-line{fill:none;stroke:#E09F3E;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.chart-dot{fill:#E09F3E}.chart-note{margin-top:9px;font-size:11px;color:var(--muted)}.chart-scroll{position:relative}.chart-bar{cursor:pointer}.chart-bar:focus rect,.chart-bar.selected rect{stroke:#172033;stroke-width:2}.chart-values{margin:10px 0 4px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#f8fafc;font-size:12px;line-height:1.55;color:var(--ink)}.chart-values b{font-size:13px}.chart-values .value-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 14px;margin-top:4px}@media(max-width:520px){.chart-values .value-grid{grid-template-columns:1fr}}
 @media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.brand img{width:50px;height:50px}header h1{font-size:25px}.table-wrap{max-height:430px}}
@@ -75,7 +75,9 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 </div>
 
 <h3>Withdrawal strategy</h3>
-<div class="strategy">Use the planned gross crystallised pension withdrawal, then planned Unit Trust sales, then cash and ISAs. If needed, use remaining Unit Trust and crystallised pensions. When both crystallised pension accounts are exhausted and further funding is needed, crystallise a new tranche (default £100,000, or the remaining uncrystallised balance if smaller). Up to 25% is paid into cash, limited by the remaining lump sum allowance; the rest stays invested in crystallised pension account 1. Only subsequent taxable drawdown payments count as taxable pension income. Further tranches are released only after the crystallised pension is exhausted. This is phased flexi-access drawdown.</div>
+<label for="withdrawalStrategy">Choose withdrawal strategy</label><select id="withdrawalStrategy"><option value="phased">Phased drawdown — planned withdrawals first</option><option value="ufpls">UFPLS — payments as needed</option><option value="cashFirst">Cash and ISAs first — then phased drawdown</option></select>
+<p id="strategyHelp" class="strategy"></p>
+
 <div class="grid" style="margin-top:11px">
 <div><label>Planned crystallised pension withdrawal (£/yr)</label><input id="crystAnnual" type="number" value=""></div>
 <div><label>Planned Unit Trust withdrawal (£/yr)</label><input id="utAnnual" type="number" value=""></div>
@@ -91,7 +93,7 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div><label for="utCost">Tax cost of Unit Trust units still held (£)</label><input id="utCost" type="number" min="0" placeholder="Unknown — provisional £0" value=""></div>
 <div><label for="utShare">Your Unit Trust ownership (%)</label><input id="utShare" type="number" min="0" max="100" value="100"></div>
 <div><label for="cashShare">Your share of cash savings interest (%)</label><input id="cashShare" type="number" min="0" max="100" value="100"></div>
-<div><label for="utYield">Unit Trust annual distribution yield (% of opening value)</label><input id="utYield" type="number" min="0" placeholder="Unknown — provisional 0%" value=""></div>
+<div><label for="utYield">Unit Trust annual distribution yield (% of opening value)</label><input id="utYield" type="number" min="0" step="0.01" placeholder="Unknown — provisional 0%" value=""></div>
 <div><label for="utIncomeType">Unit Trust distributions treated as</label><select id="utIncomeType"><option value="dividend">Dividends</option><option value="interest">Interest</option></select></div>
 <div><label for="ppIncrease">Partner private pension annual increase (%)</label><input id="ppIncrease" type="number" step=".1" value="2.5"></div>
 <div><label for="thresholdIndex">Tax threshold annual increase from 2032 (%)</label><input id="thresholdIndex" type="number" min="0" step=".1" value="0"></div>
@@ -105,7 +107,7 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div><label for="spBasis">Your State Pension amount is quoted in</label><select id="spBasis"><option value="today">Today’s money (increase before pension starts)</option><option value="start">Money at pension commencement</option></select></div>
 <div><label for="lsaStatus">Remaining pension allowance figure</label><select id="lsaStatus"><option value="estimated">Estimate / not yet confirmed</option><option value="confirmed">Confirmed by provider</option></select></div>
 </div>
-<p class="note">Mid-year timing applies half the annual growth before withdrawals and the remainder afterwards. This is an annual approximation, not monthly modelling. All crystallised pension withdrawals share your personal allowance with your other taxable income. Up to 25% of each new crystallisation tranche is moved to cash tax-free, capped by the remaining lump sum allowance you enter; previous tax-free cash across all pensions counts towards that allowance.</p>
+<p class="note">Mid-year timing applies half the annual growth before withdrawals and the remainder afterwards. This is an annual approximation, not monthly modelling. All crystallised pension withdrawals share your personal allowance with your other taxable income. Under phased drawdown, up to 25% of each new tranche moves to cash tax-free. Under UFPLS, up to 25% of each direct payment is tax-free. Both are capped by the remaining lump sum allowance you enter; previous tax-free cash across all pensions counts towards that allowance.</p>
 <div class="grid">
 <div><label>Gross investment growth (%)</label><input id="growth" type="number" step=".1" value="5"></div>
 <div><label>Annual investment fees (%)</label><input id="fees" type="number" step=".1" value="1"></div>
@@ -121,8 +123,10 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div class="kpi"><div class="v" id="startWealth">—</div><div class="l">Starting financial assets</div></div>
 <div class="kpi"><div class="v" id="endWealth">—</div><div class="l">End financial assets</div></div>
 <div class="kpi"><div class="v" id="runout">Provisional</div><div class="l">First age with an annual spending shortfall</div></div>
+<div class="kpi"><div class="v" id="preShortfallBalance">—</div><div class="l" id="preShortfallLabel">Investments at start of first shortfall year</div></div>
+<div class="kpi"><div class="v" id="firstShortfallAmount">—</div><div class="l" id="firstShortfallLabel">Unfunded spending in first shortfall year</div></div>
 <div class="kpi"><div class="v" id="cashRunout">—</div><div class="l">Cash and ISAs exhausted during this age year</div></div>
-</div><p id="summary" class="note"></p><p class="note">Home value is excluded. The depletion age is the age at the start of the first year whose full spending cannot be funded, rather than the next birthday. Table and chart assets are at year end.</p>
+</div><p id="summary" class="note"></p><p class="note">Home value is excluded. The depletion age is the age at the start of the first year whose full spending cannot be funded, rather than the next birthday. The balance at the start of the first shortfall year equals the previous year’s closing investments. It is shown in nominal future pounds, as is the unfunded spending for that year. Strategies can reach a shortfall at the same age but have different balances and shortfall amounts. Table and chart assets are at year end.</p>
 </section>
 <section class="card chart-card"><h2>Remaining investments after spending and tax</h2>
 <p class="note">Each coloured bar shows the investments remaining at the end of an age year. Tap a bar, or select an age, to see every balance.</p>
@@ -138,7 +142,7 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div style="max-width:240px;margin-top:12px"><label for="incomeAge">Inspect income at age year</label><select id="incomeAge" disabled></select></div>
 <div id="incomeValues" class="chart-values" aria-live="polite">Calculate a forecast to see pension income.</div>
 </section>
-<section class="card"><h2>Year-by-year spending and tax</h2><div class="table-wrap"><table><thead><tr><th>Age year</th><th>Year label</th><th>Opening assets</th><th>Net spending target</th><th>Your State Pension (gross)</th><th>Partner State Pension (gross)</th><th>Partner private pension (gross)</th><th>Gross regular income</th><th>Gross pension drawn</th><th>New pension crystallised</th><th>Tax-free cash released</th><th>Unit Trust sold</th><th>UT realised gain</th><th>Your income tax</th><th>Partner income tax</th><th>Your CGT</th><th>Partner CGT</th><th>Total tax</th><th>Net spending funded</th><th>Shortfall</th><th>End cash/ISAs/UT</th><th>End crystallised</th><th>End uncrystallised</th><th>End total</th><th>Remaining tax-free allowance</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
+<section class="card"><h2>Year-by-year spending and tax</h2><div class="table-wrap"><table><thead><tr><th>Age year</th><th>Year label</th><th>Opening assets</th><th>Net spending target</th><th>Your State Pension (gross)</th><th>Partner State Pension (gross)</th><th>Partner private pension (gross)</th><th>Gross regular income</th><th>Gross pension drawn</th><th>UFPLS gross paid</th><th>New pension crystallised</th><th>Tax-free pension cash</th><th>Unit Trust sold</th><th>UT realised gain</th><th>Your income tax</th><th>Partner income tax</th><th>Your CGT</th><th>Partner CGT</th><th>Total tax</th><th>Net spending funded</th><th>Shortfall</th><th>End cash/ISAs/UT</th><th>End crystallised</th><th>End uncrystallised</th><th>End total</th><th>Remaining tax-free allowance</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
 <noscript><section class="card">Open this HTML in a browser with JavaScript enabled to calculate. An iPhone attachment preview may block calculation. No precomputed forecast is shown.</section></noscript>
 </main>
 <script>
@@ -178,6 +182,8 @@ const OtiumTax = (() => {
  const assetKeys=['avivaUncryst','avivaCryst','sjpCryst','cashSavings','userCashIsa','heatherCashIsa','userSsIsa','heatherSsIsa','unitTrust'];
  const assets=b=>sum(assetKeys.map(k=>b[k]));
  function forecast(p){
+  const strategy=p.withdrawalStrategy||'phased';
+  if(!['phased','ufpls','cashFirst'].includes(strategy))throw Error('Invalid withdrawal strategy.');
   let b=Object.fromEntries(assetKeys.map(k=>[k,+p[k]||0]));
   let cost=p.utCost===null?0:p.utCost,allowance=p.remainingLsa===null?0:p.remainingLsa;
   let losses=[0,0],rows=[],depletion=null,firstCashExhaustion=null;
@@ -207,7 +213,7 @@ const OtiumTax = (() => {
    const dividends=[0,0];
    (p.utIncomeType==='interest'?savings:dividends)[0]+=utIncome*share;
    (p.utIncomeType==='interest'?savings:dividends)[1]+=utIncome*(1-share);
-   let gross=0,penGross=0,penTaxFree=0,crystallised=0,trancheCount=0,utSold=0,realised=0;
+   let gross=0,penGross=0,penTaxFree=0,ufplsGross=0,crystallised=0,trancheCount=0,utSold=0,realised=0;
    const draws=Object.fromEntries(assetKeys.map(k=>[k,0]));
    const taxNow=()=>{
     const it=ordinary.map((o,i)=>incomeTax(o,savings[i],dividends[i],thresholdScale));
@@ -221,6 +227,8 @@ const OtiumTax = (() => {
     if(key==='unitTrust'){
      const allocated=before>0?cost*amount/before:0;
      cost=positive(cost-allocated);realised+=amount-allocated;utSold+=amount;
+    } else if(key==='avivaUncryst'){
+     const tf=Math.min(amount*.25,allowance);allowance-=tf;penTaxFree+=tf;ufplsGross+=amount;penGross+=amount;ordinary[0]+=amount-tf;
     } else if(key==='avivaCryst'||key==='sjpCryst'){
      penGross+=amount;ordinary[0]+=amount;
     }
@@ -235,13 +243,26 @@ const OtiumTax = (() => {
    }
    function take(key,limit){
     const cap=Math.min(b[key],limit);if(cap<=0||net()>=spend-.001)return 0;
-    const snapshot={b:{...b},cost,gross,penGross,utSold,realised,ordinary:[...ordinary],draws:{...draws}};
-    const restore=()=>{b={...snapshot.b};cost=snapshot.cost;gross=snapshot.gross;penGross=snapshot.penGross;utSold=snapshot.utSold;realised=snapshot.realised;ordinary.splice(0,2,...snapshot.ordinary);Object.assign(draws,snapshot.draws);};
+    const snapshot={b:{...b},cost,allowance,gross,penGross,penTaxFree,ufplsGross,utSold,realised,ordinary:[...ordinary],draws:{...draws}};
+    const restore=()=>{b={...snapshot.b};cost=snapshot.cost;allowance=snapshot.allowance;gross=snapshot.gross;penGross=snapshot.penGross;penTaxFree=snapshot.penTaxFree;ufplsGross=snapshot.ufplsGross;utSold=snapshot.utSold;realised=snapshot.realised;ordinary.splice(0,2,...snapshot.ordinary);Object.assign(draws,snapshot.draws);};
     draw(key,cap);const canMeet=net()>=spend;restore();
     let selected=cap;
     if(canMeet){let lo=0,hi=cap;for(let n=0;n<55;n++){const mid=(lo+hi)/2;draw(key,mid);const enough=net()>=spend;restore();if(enough)hi=mid;else lo=mid;}selected=hi;}
     draw(key,selected);return selected;
    }
+   if(strategy==='cashFirst'){
+    // No planned pension or Unit Trust payment overrides the cash-first order.
+    for(const key of ['cashSavings','userCashIsa','heatherCashIsa','userSsIsa','heatherSsIsa','unitTrust','avivaCryst','sjpCryst'])take(key,Infinity);
+    while(net()<spend-.001&&crystallise()){
+     take('cashSavings',Infinity);take('avivaCryst',Infinity);
+    }
+   }else if(strategy==='ufpls'){
+    // Existing drawdown funds remain fully taxable; UFPLS only accesses untouched funds.
+    const firstDraw=take('avivaCryst',p.crystAnnual);
+    take('sjpCryst',positive(p.crystAnnual-firstDraw));
+    take('unitTrust',p.utAnnual);
+    for(const key of ['cashSavings','userCashIsa','heatherCashIsa','userSsIsa','heatherSsIsa','unitTrust','avivaCryst','sjpCryst','avivaUncryst'])take(key,Infinity);
+   }else{
    // Planned taxable pension payments are a gross annual target, not a limit on total funding.
    if(p.crystAnnual>0)crystallise();
    const firstDraw=take('avivaCryst',p.crystAnnual);
@@ -253,6 +274,7 @@ const OtiumTax = (() => {
    // Large annual needs may exhaust more than one tranche in the same age year.
    while(net()<spend-.001&&crystallise()){
     take('cashSavings',Infinity);take('avivaCryst',Infinity);
+   }
    }
    const tax=taxNow();
    losses=losses.map((l,i)=>positive(l-tax.lossUsed[i])+positive(-realised)*[share,1-share][i]);
@@ -267,7 +289,7 @@ const OtiumTax = (() => {
    const cashIsa=b.cashSavings+b.userCashIsa+b.heatherCashIsa+b.userSsIsa+b.heatherSsIsa;
    if(cashIsa<.01&&firstCashExhaustion===null)firstCashExhaustion=age;
    const residual=close-(openingTotal+growth+regularGross-tax.total-(spend-shortfall));
-   rows.push({balances:{...b},age,year,spend,regularGross,userSP,heatherSP,privatePP,openingTotal,total:close,liquid:b.cashSavings+b.userCashIsa+b.heatherCashIsa+b.userSsIsa+b.heatherSsIsa+b.unitTrust,cryst:b.avivaCryst+b.sjpCryst,uncryst:b.avivaUncryst,gross,penGross,penTaxFree,crystallised,trancheCount,utSold,realised,tax,netSpend:spend-shortfall,shortfall,allowance,utCost:cost,draws,residual});
+   rows.push({balances:{...b},age,year,spend,regularGross,userSP,heatherSP,privatePP,openingTotal,total:close,liquid:b.cashSavings+b.userCashIsa+b.heatherCashIsa+b.userSsIsa+b.heatherSsIsa+b.unitTrust,cryst:b.avivaCryst+b.sjpCryst,uncryst:b.avivaUncryst,gross,penGross,penTaxFree,ufplsGross,crystallised,trancheCount,utSold,realised,tax,netSpend:spend-shortfall,shortfall,allowance,utCost:cost,draws,residual});
   }
   return {rows,depletion,firstCashExhaustion,start:sum(assetKeys.map(k=>p[k])),end:assets(b)};
  }
@@ -276,10 +298,10 @@ const OtiumTax = (() => {
 if(typeof module!=='undefined')module.exports=OtiumTax;
 
 const $=id=>document.getElementById(id);
-const fields=[...OtiumTax.assetKeys,'age','years','home','startYear','spend1','spendAge1','spend2','spendAge2','spend3','spendAge3','spend4','spouseSP','spousePP','userSP','spAge','otherIncome','spIncrease','crystAnnual','utAnnual','growth','fees','inflation','cashRate','remainingLsa','crystalliseTranche','utCost','utShare','cashShare','utYield','utIncomeType','ppIncrease','thresholdIndex','withdrawalTiming','spBasis','lsaStatus'];
+const fields=[...OtiumTax.assetKeys,'age','years','home','startYear','spend1','spendAge1','spend2','spendAge2','spend3','spendAge3','spend4','spouseSP','spousePP','userSP','spAge','otherIncome','spIncrease','crystAnnual','utAnnual','growth','fees','inflation','cashRate','remainingLsa','crystalliseTranche','withdrawalStrategy','utCost','utShare','cashShare','utYield','utIncomeType','ppIncrease','thresholdIndex','withdrawalTiming','spBasis','lsaStatus'];
 const storageKey='otium-clean-settings-v1';
 const legacyKeys=['otium-annual-tax-review-20261022','otium-v16-inputs'];
-const textFields=['utIncomeType','withdrawalTiming','spBasis','lsaStatus'];
+const textFields=['withdrawalStrategy','utIncomeType','withdrawalTiming','spBasis','lsaStatus'];
 const money=x=>new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:0}).format(x);
 const defaults=Object.fromEntries(fields.map(k=>[k,$(k).value]));
 function getInputs(){
@@ -297,7 +319,8 @@ function getInputs(){
  for(const k of fields)if(!textFields.includes(k)&&p[k]!==null&&p[k]<0)throw Error('Inputs must be zero or positive.');
  if(!Number.isInteger(p.startYear)||p.startYear<2026)throw Error('Forecast start year must be 2026 or later for these tax rules.');
  if(!['mid','start','end'].includes(p.withdrawalTiming)||!['today','start'].includes(p.spBasis)||!['estimated','confirmed'].includes(p.lsaStatus)||!['dividend','interest'].includes(p.utIncomeType))throw Error('Invalid forecast option.');
- if(p.crystalliseTranche<=0)throw Error('Crystallisation tranche must be greater than zero.');
+ if(!['phased','ufpls','cashFirst'].includes(p.withdrawalStrategy))throw Error('Invalid withdrawal strategy.');
+ if(p.withdrawalStrategy!=='ufpls'&&p.crystalliseTranche<=0)throw Error('Crystallisation tranche must be greater than zero.');
  if(p.utShare>100||p.cashShare>100)throw Error('Ownership percentages cannot exceed 100.');
  if(p.spendAge1>p.spendAge2||p.spendAge2>p.spendAge3)throw Error('Spending stage ages must be in order.');
  return p;
@@ -328,7 +351,7 @@ function selectChartAge(index){
  $('forecastChart').querySelectorAll('.chart-bar').forEach((bar,i)=>{
   bar.classList.toggle('selected',i===index);bar.setAttribute('aria-pressed',String(i===index));
  });
- $('chartValues').innerHTML=`<b>Age ${r.age}–${r.age+1}: year-end investments ${money(r.total)}</b><div class="value-grid">${chartSeries.map(([key,label,colour])=>`<span><span class="swatch" style="background:${colour}" aria-hidden="true"></span> ${label}: <strong>${money(r.balances[key])}</strong></span>`).join('')}</div><div style="margin-top:8px">Annual spending shortfall: <strong>${money(r.shortfall)}</strong></div><div>New pension crystallised this year: <strong>${money(r.crystallised)}</strong> (${r.trancheCount} tranche${r.trancheCount===1?'':'s'}); tax-free cash released: <strong>${money(r.penTaxFree)}</strong>. Transfers are included in the balances above, after spending and growth.</div>`;
+ $('chartValues').innerHTML=`<b>Age ${r.age}–${r.age+1}: year-end investments ${money(r.total)}</b><div class="value-grid">${chartSeries.map(([key,label,colour])=>`<span><span class="swatch" style="background:${colour}" aria-hidden="true"></span> ${label}: <strong>${money(r.balances[key])}</strong></span>`).join('')}</div><div style="margin-top:8px">Annual spending shortfall: <strong>${money(r.shortfall)}</strong></div><div>New pension crystallised this year: <strong>${money(r.crystallised)}</strong> (${r.trancheCount} tranche${r.trancheCount===1?'':'s'}); tax-free pension cash: <strong>${money(r.penTaxFree)}</strong>; UFPLS paid: <strong>${money(r.ufplsGross)}</strong>. Transfers are included in the balances above, after spending and growth.</div>`;
 }
 function drawChart(rows){
  chartRows=rows;
@@ -383,8 +406,26 @@ function drawIncomeChart(rows){
  });
 }
 
+const strategyNames={phased:'Phased drawdown',ufpls:'UFPLS as needed',cashFirst:'Cash and ISAs first'};
+function updateStrategyUI(){
+ const strategy=$('withdrawalStrategy').value;
+ const descriptions={
+  phased:'Use the planned gross crystallised pension payment, then planned Unit Trust sales, then cash and ISAs, remaining Unit Trust and crystallised pensions. When the existing drawdown pot runs out and funding is needed, crystallise the entered tranche (default £100,000): up to 25% goes to cash, capped by the remaining tax-free allowance; the rest stays invested in crystallised account 1. Repeat only after the crystallised pension is exhausted.',
+  ufpls:'Use planned withdrawals from existing crystallised pensions and Unit Trust, then cash and ISAs, remaining Unit Trust and existing crystallised pensions. Any remaining spending gap is funded directly from the uncrystallised pension, withdrawing only what is needed after tax. Up to 25% of each payment is tax-free, capped by the remaining allowance; the rest is taxable income that year. There is no fixed tranche and no transfer into drawdown. The unwithdrawn pension remains invested.',
+  cashFirst:'Use cash savings, your Cash ISA, partner Cash ISA, your Stocks & Shares ISA, partner Stocks & Shares ISA, then Unit Trust, then existing crystallised pensions. Only when those sources cannot meet spending, crystallise the entered pension tranche and use its cash and taxable drawdown. Planned annual pension and Unit Trust withdrawal fields are ignored in this strategy.'
+ };
+ $('strategyHelp').textContent=descriptions[strategy]||'';
+ $('crystalliseTranche').disabled=strategy==='ufpls';
+ $('crystAnnual').disabled=strategy==='cashFirst';$('utAnnual').disabled=strategy==='cashFirst';
+}
+function formatDistributionYield(){
+ const value=$('utYield').value.trim();
+ if(value!==''&&Number.isFinite(Number(value))&&Number(value)>=0)$('utYield').value=Number(value).toFixed(2);
+}
 function run(){
  try{
+  formatDistributionYield();
+  updateStrategyUI();
   const p=getInputs(),result=OtiumTax.forecast(p);
   try{localStorage.setItem(storageKey,JSON.stringify(Object.fromEntries(fields.map(k=>[k,$(k).value]))));}catch(e){}
   $('inputTotal').textContent=money(result.start);
@@ -397,9 +438,14 @@ function run(){
   $('taxWarning').textContent=(provisional?'PROVISIONAL — confirm '+missing.join('; ')+'. ':'Entered tax inputs are being used. ')+'SJP tax-free cash status, cash interest ownership and Your partner’s pension increases also need confirming. No historical tax-year reconciliation is included.';
   $('startWealth').textContent=money(result.start);$('endWealth').textContent=money(result.end);
   $('runout').textContent=(provisional?'Provisional: ':'')+(result.depletion===null?'Beyond forecast':'age '+result.depletion);
+  const firstShortfall=result.rows.find(r=>r.age===result.depletion);
+  $('preShortfallBalance').textContent=firstShortfall?money(firstShortfall.openingTotal):'Not reached';
+  $('firstShortfallAmount').textContent=firstShortfall?money(firstShortfall.shortfall):'Not reached';
+  $('preShortfallLabel').textContent=firstShortfall?`Investments at start of age ${firstShortfall.age}–${firstShortfall.age+1}`:'Investments at start of first shortfall year';
+  $('firstShortfallLabel').textContent=firstShortfall?`Unfunded spending during age ${firstShortfall.age}–${firstShortfall.age+1}`:'Unfunded spending in first shortfall year';
   $('cashRunout').textContent=result.firstCashExhaustion===null?'Beyond forecast':'Age '+result.firstCashExhaustion;
-  $('summary').textContent=`${provisional?'Provisional planning illustration. ':''}${p.withdrawalTiming==='mid'?'Mid-year':p.withdrawalTiming==='start'?'Beginning-of-year':'End-of-year'} withdrawals. Starting age ${p.age}; gross growth ${p.growth}%, fees ${p.fees}%, inflation ${p.inflation}%. Current England tax rates are held constant; thresholds increase by ${p.thresholdIndex}% a year from 2032. Home ${money(p.home)} is excluded. Both people’s pensions continue throughout. Confirm missing inputs before relying on any depletion age.`;
-  $('tbody').innerHTML=result.rows.map(r=>'<tr>'+[`${r.age}–${r.age+1}`,r.year,...[r.openingTotal,r.spend,r.userSP,r.heatherSP,r.privatePP,r.regularGross,r.penGross,r.crystallised,r.penTaxFree,r.utSold,r.realised,r.tax.income[0],r.tax.income[1],r.tax.cgt[0],r.tax.cgt[1],r.tax.total,r.netSpend,r.shortfall,r.liquid,r.cryst,r.uncryst,r.total,r.allowance].map(money)].map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
+  $('summary').textContent=`${provisional?'Provisional planning illustration. ':''}${strategyNames[p.withdrawalStrategy]}. ${p.withdrawalTiming==='mid'?'Mid-year':p.withdrawalTiming==='start'?'Beginning-of-year':'End-of-year'} withdrawals. Starting age ${p.age}; gross growth ${p.growth}%, fees ${p.fees}%, inflation ${p.inflation}%. Current England tax rates are held constant; thresholds increase by ${p.thresholdIndex}% a year from 2032. Home ${money(p.home)} is excluded. Both people’s pensions continue throughout. Confirm missing inputs before relying on any depletion age.`;
+  $('tbody').innerHTML=result.rows.map(r=>'<tr>'+[`${r.age}–${r.age+1}`,r.year,...[r.openingTotal,r.spend,r.userSP,r.heatherSP,r.privatePP,r.regularGross,r.penGross,r.ufplsGross,r.crystallised,r.penTaxFree,r.utSold,r.realised,r.tax.income[0],r.tax.income[1],r.tax.cgt[0],r.tax.cgt[1],r.tax.total,r.netSpend,r.shortfall,r.liquid,r.cryst,r.uncryst,r.total,r.allowance].map(money)].map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
   drawChart(result.rows);
   $('status').textContent='Annual tax forecast updated. '+(provisional?'Missing tax inputs are flagged below.':'');
   window.otiumLastResult=result;
@@ -407,9 +453,10 @@ function run(){
 }
 function clearResults(){
  window.otiumLastResult=null;chartRows=[];
+ $('preShortfallLabel').textContent='Investments at start of first shortfall year';$('firstShortfallLabel').textContent='Unfunded spending in first shortfall year';
  $('incomeChart').innerHTML='';$('incomeLegend').innerHTML='';$('incomeAge').innerHTML='';$('incomeAge').disabled=true;$('incomeValues').textContent='Calculate a forecast to see pension income.';
  $('chartLegend').innerHTML='';$('chartAge').innerHTML='';$('chartAge').disabled=true;$('chartValues').textContent='Calculate a forecast to see the investment breakdown.';
- for(const k of ['startWealth','endWealth','runout','cashRunout','inputTotal'])$(k).textContent='—';
+ for(const k of ['startWealth','endWealth','runout','preShortfallBalance','firstShortfallAmount','cashRunout','inputTotal'])$(k).textContent='—';
  $('tbody').innerHTML='';$('forecastChart').innerHTML='';$('summary').textContent='';$('taxWarning').textContent='';
 }
 function settings(){return {format:'otium-settings',version:1,inputs:Object.fromEntries(fields.map(k=>[k,$(k).value]))};}
@@ -426,18 +473,21 @@ function applySettings(raw){
   const value=v===null?'':String(v);
   if(value.length>100)throw Error('Input is too long: '+k);
   if(textFields.includes(k)){
-   const allowed={utIncomeType:['dividend','interest'],withdrawalTiming:['mid','start','end'],spBasis:['today','start'],lsaStatus:['estimated','confirmed']};
+   const allowed={withdrawalStrategy:['phased','ufpls','cashFirst'],utIncomeType:['dividend','interest'],withdrawalTiming:['mid','start','end'],spBasis:['today','start'],lsaStatus:['estimated','confirmed']};
    if(!allowed[k].includes(value))throw Error('Invalid option: '+k);
   }else if(value!==''&&(!Number.isFinite(Number(value))||Number(value)<0))throw Error('Invalid number: '+k);
   selected[k]=value;
  }
  for(const k of fields)$(k).value=selected[k];
+ formatDistributionYield();
+ updateStrategyUI();
 }
 for(const k of fields)$(k).addEventListener('change',run);
 $('calculateBtn').addEventListener('click',run);
 $('clearBtn').addEventListener('click',()=>{
  try{for(const key of [storageKey,...legacyKeys])localStorage.removeItem(key);}catch(e){}
  for(const k of fields)$(k).value=defaults[k];
+ updateStrategyUI();
  clearResults();$('status').textContent='Personal figures and saved Otium inputs cleared. Enter new figures or import settings.';
 });
 $('exportBtn').addEventListener('click',()=>{
@@ -455,9 +505,12 @@ $('legacyBtn').addEventListener('click',()=>{
  try{for(const key of legacyKeys){const raw=localStorage.getItem(key);if(raw){applySettings(JSON.parse(raw));run();return;}}$('status').textContent='No earlier saved inputs found in this browser. Import a settings file instead.';}
  catch(e){$('status').textContent='Could not load earlier inputs: '+e.message;}
 });
+updateStrategyUI();
 try{const raw=localStorage.getItem(storageKey);if(raw){applySettings(JSON.parse(raw));run();}else{clearResults();$('status').textContent='Ready for your figures. Import settings or complete the inputs above.';}}
 catch(e){clearResults();$('status').textContent='Saved settings could not be loaded. Import settings or enter your figures.';}
 
+</script>
+<script>
 // Keep the existing installed-app integration when served over HTTPS.
 if('serviceWorker' in navigator && location.protocol!=='file:'){
  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(r=>r.update()).catch(()=>{}));
