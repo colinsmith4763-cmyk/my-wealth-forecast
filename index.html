@@ -483,8 +483,14 @@ function applySettings(raw){
  formatDistributionYield();
  updateStrategyUI();
 }
-for(const k of fields)$(k).addEventListener('change',run);
-for(const k of OtiumTax.assetKeys)$(k).addEventListener('input',updateInvestmentTotal);
+function markForecastOutdated(){
+ clearResults();
+ updateInvestmentTotal();
+ $('status').textContent='Inputs changed. Press Calculate forecast to update the run-out age and charts.';
+}
+for(const k of fields)$(k).addEventListener('input',markForecastOutdated);
+for(const k of fields)$(k).addEventListener('change',markForecastOutdated);
+
 $('calculateBtn').addEventListener('click',run);
 $('clearBtn').addEventListener('click',()=>{
  try{for(const key of [storageKey,...legacyKeys])localStorage.removeItem(key);}catch(e){}
