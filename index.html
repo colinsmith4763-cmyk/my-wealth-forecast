@@ -422,11 +422,12 @@ function formatDistributionYield(){
  const value=$('utYield').value.trim();
  if(value!==''&&Number.isFinite(Number(value))&&Number(value)>=0)$('utYield').value=Number(value).toFixed(2);
 }
+function updateInvestmentTotal(){let total=0,entered=false,invalid=false;for(const key of OtiumTax.assetKeys){const raw=$(key).value.trim();if(raw==='')continue;entered=true;const n=Number(raw);if(!Number.isFinite(n)||n<0){invalid=true;break;}total+=n;}$('inputTotal').textContent=invalid?'Check investment values':entered?money(total):'—';}
 function run(){
  try{
   formatDistributionYield();
   updateStrategyUI();
-  const p=getInputs(),result=OtiumTax.forecast(p);
+  updateInvestmentTotal();const p=getInputs(),result=OtiumTax.forecast(p);
   try{localStorage.setItem(storageKey,JSON.stringify(Object.fromEntries(fields.map(k=>[k,$(k).value]))));}catch(e){}
   $('inputTotal').textContent=money(result.start);
   const missing=[];
@@ -456,7 +457,7 @@ function clearResults(){
  $('preShortfallLabel').textContent='Investments at start of first shortfall year';$('firstShortfallLabel').textContent='Unfunded spending in first shortfall year';
  $('incomeChart').innerHTML='';$('incomeLegend').innerHTML='';$('incomeAge').innerHTML='';$('incomeAge').disabled=true;$('incomeValues').textContent='Calculate a forecast to see pension income.';
  $('chartLegend').innerHTML='';$('chartAge').innerHTML='';$('chartAge').disabled=true;$('chartValues').textContent='Calculate a forecast to see the investment breakdown.';
- for(const k of ['startWealth','endWealth','runout','preShortfallBalance','firstShortfallAmount','cashRunout','inputTotal'])$(k).textContent='—';
+ for(const k of ['startWealth','endWealth','runout','preShortfallBalance','firstShortfallAmount','cashRunout'])$(k).textContent='—';
  $('tbody').innerHTML='';$('forecastChart').innerHTML='';$('summary').textContent='';$('taxWarning').textContent='';
 }
 function settings(){return {format:'otium-settings',version:1,inputs:Object.fromEntries(fields.map(k=>[k,$(k).value]))};}
@@ -483,12 +484,13 @@ function applySettings(raw){
  updateStrategyUI();
 }
 for(const k of fields)$(k).addEventListener('change',run);
+for(const k of OtiumTax.assetKeys)$(k).addEventListener('input',updateInvestmentTotal);
 $('calculateBtn').addEventListener('click',run);
 $('clearBtn').addEventListener('click',()=>{
  try{for(const key of [storageKey,...legacyKeys])localStorage.removeItem(key);}catch(e){}
  for(const k of fields)$(k).value=defaults[k];
  updateStrategyUI();
- clearResults();$('status').textContent='Personal figures and saved Otium inputs cleared. Enter new figures or import settings.';
+ clearResults();updateInvestmentTotal();$('status').textContent='Personal figures and saved Otium inputs cleared. Enter new figures or import settings.';
 });
 $('exportBtn').addEventListener('click',()=>{
  const blob=new Blob([JSON.stringify(settings(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob);
@@ -506,7 +508,7 @@ $('legacyBtn').addEventListener('click',()=>{
  catch(e){$('status').textContent='Could not load earlier inputs: '+e.message;}
 });
 updateStrategyUI();
-try{const raw=localStorage.getItem(storageKey);if(raw){applySettings(JSON.parse(raw));run();}else{clearResults();$('status').textContent='Ready for your figures. Import settings or complete the inputs above.';}}
+updateInvestmentTotal();try{const raw=localStorage.getItem(storageKey);if(raw){applySettings(JSON.parse(raw));run();}else{clearResults();$('status').textContent='Ready for your figures. Import settings or complete the inputs above.';}}
 catch(e){clearResults();$('status').textContent='Saved settings could not be loaded. Import settings or enter your figures.';}
 
 </script>
