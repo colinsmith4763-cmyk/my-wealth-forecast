@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F8C62D" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="apple-touch-icon" href="icon-180.png" />
-<meta name="otium-release" content="2026-10-23-strategies-shortfall-yield" />
+<meta name="otium-release" content="2026-10-29-gifting" />
 
 
 <title>Otium — retirement forecast</title>
@@ -101,6 +101,9 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <p class="note">Ownership defaults to 100% yours; change it for a joint holding. Your partner’s private pension increases by 2.5% by default, and tax thresholds are held constant unless you change that assumption. These are assumptions to check, not predictions of future tax policy. Distribution yield is included within the total investment return and assumed reinvested; reinvested income increases the Unit Trust cost basis. Cash savings interest is capitalised and taxed separately; ISA interest is exempt.</p>
 <p class="note">This is a full-year projection from the balances above, not a reconciliation of the partly completed 2026/27 tax year. Do not subtract past withdrawals from these current balances again. Historical employment income, pension payments and gains before the forecast start are not included. No other gains/losses, reliefs, Marriage Allowance or external investment income are assumed. Both people's pensions continue throughout; survivor changes are not modelled.</p>
 <p class="note">Sources checked 22 October 2026: <a href="https://www.gov.uk/income-tax-rates">Income Tax</a> · <a href="https://www.gov.uk/capital-gains-tax/rates">Capital Gains Tax</a> · <a href="https://www.gov.uk/tax-on-dividends">Dividends</a> · <a href="https://www.gov.uk/apply-tax-free-interest-on-savings">Savings</a> · <a href="https://www.gov.uk/tax-on-your-private-pension/lump-sum-allowance">Pension allowance</a>. Rates are held constant in the forecast. Personal allowances are allocated to ordinary income, then savings, then dividends; unusual income mixes may need a different allocation.</p>
+<h3>Planned gifts</h3>
+<p class="note">Enter gifts in pounds at the time of the gift (no inflation increase). Choose an age or calendar year. The selected pot is used first; any remaining need follows your withdrawal strategy, including withdrawal tax. Gifts are additional to annual spending.</p>
+<div id="giftRows"></div><button id="addGift" type="button" class="secondary">Add gift</button>
 <h3>Forecast assumptions</h3>
 <div class="grid">
 <div><label for="withdrawalTiming">Annual withdrawal timing</label><select id="withdrawalTiming"><option value="mid">Mid-year (default)</option><option value="start">Beginning of year</option><option value="end">End of year</option></select></div>
@@ -122,9 +125,9 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div class="kpis">
 <div class="kpi"><div class="v" id="startWealth">—</div><div class="l">Starting financial assets</div></div>
 <div class="kpi"><div class="v" id="endWealth">—</div><div class="l">End financial assets</div></div>
-<div class="kpi"><div class="v" id="runout">Provisional</div><div class="l">First age with an annual spending shortfall</div></div>
+<div class="kpi"><div class="v" id="runout">Provisional</div><div class="l">First age with a spending or gifts shortfall</div></div>
 <div class="kpi"><div class="v" id="preShortfallBalance">—</div><div class="l" id="preShortfallLabel">Investments at start of first shortfall year</div></div>
-<div class="kpi"><div class="v" id="firstShortfallAmount">—</div><div class="l" id="firstShortfallLabel">Unfunded spending in first shortfall year</div></div>
+<div class="kpi"><div class="v" id="firstShortfallAmount">—</div><div class="l" id="firstShortfallLabel">Unfunded spending and gifts in first shortfall year</div></div>
 <div class="kpi"><div class="v" id="cashRunout">—</div><div class="l">Cash and ISAs exhausted during this age year</div></div>
 </div><p id="summary" class="note"></p><p class="note">Home value is excluded. The depletion age is the age at the start of the first year whose full spending cannot be funded, rather than the next birthday. The balance at the start of the first shortfall year equals the previous year’s closing investments. It is shown in nominal future pounds, as is the unfunded spending for that year. Strategies can reach a shortfall at the same age but have different balances and shortfall amounts. Table and chart assets are at year end.</p>
 </section>
@@ -142,7 +145,7 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div style="max-width:240px;margin-top:12px"><label for="incomeAge">Inspect income at age year</label><select id="incomeAge" disabled></select></div>
 <div id="incomeValues" class="chart-values" aria-live="polite">Calculate a forecast to see pension income.</div>
 </section>
-<section class="card"><h2>Year-by-year spending and tax</h2><div class="table-wrap"><table><thead><tr><th>Age year</th><th>Year label</th><th>Opening assets</th><th>Net spending target</th><th>Your State Pension (gross)</th><th>Partner State Pension (gross)</th><th>Partner private pension (gross)</th><th>Gross regular income</th><th>Gross pension drawn</th><th>UFPLS gross paid</th><th>New pension crystallised</th><th>Tax-free pension cash</th><th>Unit Trust sold</th><th>UT realised gain</th><th>Your income tax</th><th>Partner income tax</th><th>Your CGT</th><th>Partner CGT</th><th>Total tax</th><th>Net spending funded</th><th>Shortfall</th><th>End cash/ISAs/UT</th><th>End crystallised</th><th>End uncrystallised</th><th>End total</th><th>Remaining tax-free allowance</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
+<section class="card"><h2>Year-by-year spending and tax</h2><div class="table-wrap"><table><thead><tr><th>Age year</th><th>Year label</th><th>Opening assets</th><th>Spending + gifts target</th><th>Planned gifts</th><th>Your State Pension (gross)</th><th>Partner State Pension (gross)</th><th>Partner private pension (gross)</th><th>Gross regular income</th><th>Gross pension drawn</th><th>UFPLS gross paid</th><th>New pension crystallised</th><th>Tax-free pension cash</th><th>Unit Trust sold</th><th>UT realised gain</th><th>Your income tax</th><th>Partner income tax</th><th>Your CGT</th><th>Partner CGT</th><th>Total tax</th><th>Spending + gifts funded</th><th>Shortfall</th><th>End cash/ISAs/UT</th><th>End crystallised</th><th>End uncrystallised</th><th>End total</th><th>Remaining tax-free allowance</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
 <noscript><section class="card">Open this HTML in a browser with JavaScript enabled to calculate. An iPhone attachment preview may block calculation. No precomputed forecast is shown.</section></noscript>
 </main>
 <script>
@@ -192,7 +195,11 @@ const OtiumTax = (() => {
    const age=p.age+y,year=p.startYear+y,inf=(1+p.inflation/100)**y;
    const thresholdScale=(1+p.thresholdIndex/100)**Math.max(0,year-2031);
    const opening={...b},openingTotal=assets(b);
-   const spend=(age<p.spendAge1?p.spend1:age<p.spendAge2?p.spend2:age<p.spendAge3?p.spend3:p.spend4)*inf;
+   let spend=(age<p.spendAge1?p.spend1:age<p.spendAge2?p.spend2:age<p.spendAge3?p.spend3:p.spend4)*inf;
+   const lifestyleSpend=spend;
+   const dueGifts=(p.gifts||[]).filter(g=>g.basis==='year'?g.when===year:g.when===age);
+   const giftTarget=sum(dueGifts.map(g=>g.amount));
+   spend+=giftTarget;
    const spYears=p.spBasis==='start'?Math.max(0,age-Math.max(p.age,p.spAge)):y;
    const userSP=age>=p.spAge?p.userSP*(1+p.spIncrease/100)**spYears:0;
    const heatherSP=p.spouseSP*(1+p.spIncrease/100)**y;
@@ -250,6 +257,15 @@ const OtiumTax = (() => {
     if(canMeet){let lo=0,hi=cap;for(let n=0;n<55;n++){const mid=(lo+hi)/2;draw(key,mid);const enough=net()>=spend;restore();if(enough)hi=mid;else lo=mid;}selected=hi;}
     draw(key,selected);return selected;
    }
+   // Reserve each gift from its preferred pot; normal strategy funds any remainder.
+   for(const gift of dueGifts){
+    if(gift.source!=='strategy'){
+     const fullTarget=spend;
+     spend=net()+gift.amount;
+     take(gift.source,Infinity);
+     spend=fullTarget;
+    }
+   }
    if(strategy==='cashFirst'){
     // No planned pension or Unit Trust payment overrides the cash-first order.
     for(const key of ['cashSavings','userCashIsa','heatherCashIsa','userSsIsa','heatherSsIsa','unitTrust','avivaCryst','sjpCryst'])take(key,Infinity);
@@ -289,7 +305,7 @@ const OtiumTax = (() => {
    const cashIsa=b.cashSavings+b.userCashIsa+b.heatherCashIsa+b.userSsIsa+b.heatherSsIsa;
    if(cashIsa<.01&&firstCashExhaustion===null)firstCashExhaustion=age;
    const residual=close-(openingTotal+growth+regularGross-tax.total-(spend-shortfall));
-   rows.push({balances:{...b},age,year,spend,regularGross,userSP,heatherSP,privatePP,openingTotal,total:close,liquid:b.cashSavings+b.userCashIsa+b.heatherCashIsa+b.userSsIsa+b.heatherSsIsa+b.unitTrust,cryst:b.avivaCryst+b.sjpCryst,uncryst:b.avivaUncryst,gross,penGross,penTaxFree,ufplsGross,crystallised,trancheCount,utSold,realised,tax,netSpend:spend-shortfall,shortfall,allowance,utCost:cost,draws,residual});
+   rows.push({giftTarget,lifestyleSpend,balances:{...b},age,year,spend,regularGross,userSP,heatherSP,privatePP,openingTotal,total:close,liquid:b.cashSavings+b.userCashIsa+b.heatherCashIsa+b.userSsIsa+b.heatherSsIsa+b.unitTrust,cryst:b.avivaCryst+b.sjpCryst,uncryst:b.avivaUncryst,gross,penGross,penTaxFree,ufplsGross,crystallised,trancheCount,utSold,realised,tax,netSpend:spend-shortfall,shortfall,allowance,utCost:cost,draws,residual});
   }
   return {rows,depletion,firstCashExhaustion,start:sum(assetKeys.map(k=>p[k])),end:assets(b)};
  }
@@ -323,8 +339,32 @@ function getInputs(){
  if(p.withdrawalStrategy!=='ufpls'&&p.crystalliseTranche<=0)throw Error('Crystallisation tranche must be greater than zero.');
  if(p.utShare>100||p.cashShare>100)throw Error('Ownership percentages cannot exceed 100.');
  if(p.spendAge1>p.spendAge2||p.spendAge2>p.spendAge3)throw Error('Spending stage ages must be in order.');
+ p.gifts=readGifts();
+ for(const g of p.gifts){const offset=g.when-(g.basis==='year'?p.startYear:p.age);if(offset<0||offset>=p.years)throw Error('A gift falls outside the forecast. Check its age/year or extend the forecast.');}
  return p;
 }
+const giftSources=[['strategy','Withdrawal strategy'],...OtiumTax.assetKeys.map(k=>[k,({avivaUncryst:'Uncrystallised pension (UFPLS)',avivaCryst:'Crystallised pension 1',sjpCryst:'Crystallised pension 2',cashSavings:'Cash savings',userCashIsa:'Your Cash ISA',heatherCashIsa:'Partner Cash ISA',userSsIsa:'Your Stocks & Shares ISA',heatherSsIsa:'Partner Stocks & Shares ISA',unitTrust:'Unit Trust'})[k]])];
+function addGift(g={}){
+ const row=document.createElement('div');row.className='card gift-row';
+ row.innerHTML='<div class="grid"><div><label>Gift amount (£)</label><input class="gift-amount" type="number" min="0" step="0.01"></div><div><label>Timing</label><select class="gift-basis"><option value="age">At age</option><option value="year">In year</option></select></div><div><label>Age or year</label><input class="gift-when" type="number" min="18" step="1"></div><div><label>Fund first from</label><select class="gift-source"></select></div></div><div class="actions"><button type="button" class="secondary gift-remove">Remove gift</button></div>';
+ row.querySelector('.gift-source').innerHTML=giftSources.map(([k,label])=>'<option value="'+k+'">'+label+'</option>').join('');
+ row.querySelector('.gift-amount').value=g.amount??'';
+ row.querySelector('.gift-basis').value=g.basis||'age';
+ row.querySelector('.gift-when').value=g.when??'';
+ row.querySelector('.gift-source').value=g.source||'strategy';
+ row.addEventListener('input',markForecastOutdated);row.addEventListener('change',markForecastOutdated);
+ row.querySelector('.gift-remove').onclick=()=>{row.remove();markForecastOutdated();};
+ $('giftRows').appendChild(row);
+}
+function validateGifts(gifts){
+ if(!Array.isArray(gifts)||gifts.length>100)throw Error('Use up to 100 gifts.');
+ return gifts.map(g=>{
+  if(!g||!['age','year'].includes(g.basis)||!giftSources.some(([k])=>k===g.source)||!Number.isFinite(g.amount)||g.amount<=0||!Number.isInteger(g.when)||g.when<(g.basis==='year'?2026:18)||g.when>(g.basis==='year'?2200:160))throw Error('Each gift needs a positive amount, valid age/year and funding pot.');
+  return {amount:g.amount,basis:g.basis,when:g.when,source:g.source};
+ });
+}
+function readGifts(){return validateGifts([...document.querySelectorAll('.gift-row')].map(r=>({amount:Number(r.querySelector('.gift-amount').value),basis:r.querySelector('.gift-basis').value,when:Number(r.querySelector('.gift-when').value),source:r.querySelector('.gift-source').value}))); }
+$('addGift').onclick=()=>{addGift();markForecastOutdated();};
 const chartSeries=[
  ['avivaUncryst','Uncrystallised pension','#F97066'],
  ['avivaCryst','Crystallised pension — account 1','#B42318'],
@@ -351,7 +391,7 @@ function selectChartAge(index){
  $('forecastChart').querySelectorAll('.chart-bar').forEach((bar,i)=>{
   bar.classList.toggle('selected',i===index);bar.setAttribute('aria-pressed',String(i===index));
  });
- $('chartValues').innerHTML=`<b>Age ${r.age}–${r.age+1}: year-end investments ${money(r.total)}</b><div class="value-grid">${chartSeries.map(([key,label,colour])=>`<span><span class="swatch" style="background:${colour}" aria-hidden="true"></span> ${label}: <strong>${money(r.balances[key])}</strong></span>`).join('')}</div><div style="margin-top:8px">Annual spending shortfall: <strong>${money(r.shortfall)}</strong></div><div>New pension crystallised this year: <strong>${money(r.crystallised)}</strong> (${r.trancheCount} tranche${r.trancheCount===1?'':'s'}); tax-free pension cash: <strong>${money(r.penTaxFree)}</strong>; UFPLS paid: <strong>${money(r.ufplsGross)}</strong>. Transfers are included in the balances above, after spending and growth.</div>`;
+ $('chartValues').innerHTML=`<b>Age ${r.age}–${r.age+1}: year-end investments ${money(r.total)}</b><div class="value-grid">${chartSeries.map(([key,label,colour])=>`<span><span class="swatch" style="background:${colour}" aria-hidden="true"></span> ${label}: <strong>${money(r.balances[key])}</strong></span>`).join('')}</div><div style="margin-top:8px">Annual spending and gifts shortfall: <strong>${money(r.shortfall)}</strong></div><div>New pension crystallised this year: <strong>${money(r.crystallised)}</strong> (${r.trancheCount} tranche${r.trancheCount===1?'':'s'}); tax-free pension cash: <strong>${money(r.penTaxFree)}</strong>; UFPLS paid: <strong>${money(r.ufplsGross)}</strong>. Transfers are included in the balances above, after spending and growth.</div>`;
 }
 function drawChart(rows){
  chartRows=rows;
@@ -428,7 +468,7 @@ function run(){
   formatDistributionYield();
   updateStrategyUI();
   updateInvestmentTotal();const p=getInputs(),result=OtiumTax.forecast(p);
-  try{localStorage.setItem(storageKey,JSON.stringify(Object.fromEntries(fields.map(k=>[k,$(k).value]))));}catch(e){}
+  try{localStorage.setItem(storageKey,JSON.stringify({...Object.fromEntries(fields.map(k=>[k,$(k).value])),gifts:readGifts()}));}catch(e){}
   $('inputTotal').textContent=money(result.start);
   const missing=[];
   if(p.remainingLsa===null)missing.push('remaining pension tax-free allowance: assumes £0');
@@ -443,10 +483,10 @@ function run(){
   $('preShortfallBalance').textContent=firstShortfall?money(firstShortfall.openingTotal):'Not reached';
   $('firstShortfallAmount').textContent=firstShortfall?money(firstShortfall.shortfall):'Not reached';
   $('preShortfallLabel').textContent=firstShortfall?`Investments at start of age ${firstShortfall.age}–${firstShortfall.age+1}`:'Investments at start of first shortfall year';
-  $('firstShortfallLabel').textContent=firstShortfall?`Unfunded spending during age ${firstShortfall.age}–${firstShortfall.age+1}`:'Unfunded spending in first shortfall year';
+  $('firstShortfallLabel').textContent=firstShortfall?`Unfunded spending and gifts during age ${firstShortfall.age}–${firstShortfall.age+1}`:'Unfunded spending in first shortfall year';
   $('cashRunout').textContent=result.firstCashExhaustion===null?'Beyond forecast':'Age '+result.firstCashExhaustion;
-  $('summary').textContent=`${provisional?'Provisional planning illustration. ':''}${strategyNames[p.withdrawalStrategy]}. ${p.withdrawalTiming==='mid'?'Mid-year':p.withdrawalTiming==='start'?'Beginning-of-year':'End-of-year'} withdrawals. Starting age ${p.age}; gross growth ${p.growth}%, fees ${p.fees}%, inflation ${p.inflation}%. Current England tax rates are held constant; thresholds increase by ${p.thresholdIndex}% a year from 2032. Home ${money(p.home)} is excluded. Both people’s pensions continue throughout. Confirm missing inputs before relying on any depletion age.`;
-  $('tbody').innerHTML=result.rows.map(r=>'<tr>'+[`${r.age}–${r.age+1}`,r.year,...[r.openingTotal,r.spend,r.userSP,r.heatherSP,r.privatePP,r.regularGross,r.penGross,r.ufplsGross,r.crystallised,r.penTaxFree,r.utSold,r.realised,r.tax.income[0],r.tax.income[1],r.tax.cgt[0],r.tax.cgt[1],r.tax.total,r.netSpend,r.shortfall,r.liquid,r.cryst,r.uncryst,r.total,r.allowance].map(money)].map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
+  $('summary').textContent=`${provisional?'Provisional planning illustration. ':''}${strategyNames[p.withdrawalStrategy]}. ${p.withdrawalTiming==='mid'?'Mid-year':p.withdrawalTiming==='start'?'Beginning-of-year':'End-of-year'} withdrawals. Starting age ${p.age}; gross growth ${p.growth}%, fees ${p.fees}%, inflation ${p.inflation}%. Current England tax rates are held constant; thresholds increase by ${p.thresholdIndex}% a year from 2032. Home ${money(p.home)} is excluded. Planned gifts within the forecast: ${money(result.rows.reduce((total,r)=>total+r.giftTarget,0))}. Both people’s pensions continue throughout. Confirm missing inputs before relying on any depletion age.`;
+  $('tbody').innerHTML=result.rows.map(r=>'<tr>'+[`${r.age}–${r.age+1}`,r.year,...[r.openingTotal,r.spend,r.giftTarget,r.userSP,r.heatherSP,r.privatePP,r.regularGross,r.penGross,r.ufplsGross,r.crystallised,r.penTaxFree,r.utSold,r.realised,r.tax.income[0],r.tax.income[1],r.tax.cgt[0],r.tax.cgt[1],r.tax.total,r.netSpend,r.shortfall,r.liquid,r.cryst,r.uncryst,r.total,r.allowance].map(money)].map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
   drawChart(result.rows);
   $('status').textContent='Annual tax forecast updated. '+(provisional?'Missing tax inputs are flagged below.':'');
   window.otiumLastResult=result;
@@ -460,7 +500,7 @@ function clearResults(){
  for(const k of ['startWealth','endWealth','runout','preShortfallBalance','firstShortfallAmount','cashRunout'])$(k).textContent='—';
  $('tbody').innerHTML='';$('forecastChart').innerHTML='';$('summary').textContent='';$('taxWarning').textContent='';
 }
-function settings(){return {format:'otium-settings',version:1,inputs:Object.fromEntries(fields.map(k=>[k,$(k).value]))};}
+function settings(){return {format:'otium-settings',version:1,inputs:{...Object.fromEntries(fields.map(k=>[k,$(k).value])),gifts:readGifts()}};}
 function applySettings(raw){
  if(!raw||typeof raw!=='object'||Array.isArray(raw))throw Error('Choose an Otium settings JSON file.');
  if(raw.format&&raw.format!=='otium-settings')throw Error('This is not an Otium settings file.');
@@ -479,7 +519,9 @@ function applySettings(raw){
   }else if(value!==''&&(!Number.isFinite(Number(value))||Number(value)<0))throw Error('Invalid number: '+k);
   selected[k]=value;
  }
+ const gifts=validateGifts(data.gifts||[]);
  for(const k of fields)$(k).value=selected[k];
+ $('giftRows').innerHTML='';gifts.forEach(addGift);
  formatDistributionYield();
  updateStrategyUI();
 }
@@ -494,11 +536,13 @@ for(const k of fields)$(k).addEventListener('change',markForecastOutdated);
 $('calculateBtn').addEventListener('click',run);
 $('clearBtn').addEventListener('click',()=>{
  try{for(const key of [storageKey,...legacyKeys])localStorage.removeItem(key);}catch(e){}
+ $('giftRows').innerHTML='';
  for(const k of fields)$(k).value=defaults[k];
  updateStrategyUI();
  clearResults();updateInvestmentTotal();$('status').textContent='Personal figures and saved Otium inputs cleared. Enter new figures or import settings.';
 });
 $('exportBtn').addEventListener('click',()=>{
+ try{readGifts();}catch(e){$('status').textContent=e.message;return;}
  const blob=new Blob([JSON.stringify(settings(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob);
  const a=document.createElement('a');a.href=url;a.download='Otium-settings.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  $('status').textContent='Settings exported. Keep this file private: it contains your financial inputs.';
