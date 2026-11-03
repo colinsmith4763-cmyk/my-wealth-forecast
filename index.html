@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F8C62D" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="apple-touch-icon" href="icon-180.png" />
-<meta name="otium-release" content="2026-10-29-gifting" />
+<meta name="otium-release" content="2026-11-03-gold-controls" />
 
 
 <title>Otium — retirement forecast</title>
@@ -22,7 +22,13 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 .chart-card{overflow:hidden}.chart-legend{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 12px;font-size:12px;color:var(--muted)}.legend-item{display:flex;align-items:center;gap:6px}.swatch{width:12px;height:12px;border-radius:3px;display:inline-block}.swatch.cryst{background:#D92D20}.swatch.uncryst{background:#F97066}.swatch.other{background:#76A9DC}.swatch.state{background:#E09F3E}.chart-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:#fff}.chart-inner{min-width:900px;padding:14px 12px 8px}.chart-svg{width:100%;height:390px;display:block}.chart-axis{stroke:#94a3b8;stroke-width:1}.chart-grid{stroke:#e8eef5;stroke-width:1}.chart-label{fill:#64748b;font-size:11px}.chart-line{fill:none;stroke:#E09F3E;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.chart-dot{fill:#E09F3E}.chart-note{margin-top:9px;font-size:11px;color:var(--muted)}.chart-scroll{position:relative}.chart-bar{cursor:pointer}.chart-bar:focus rect,.chart-bar.selected rect{stroke:#172033;stroke-width:2}.chart-values{margin:10px 0 4px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#f8fafc;font-size:12px;line-height:1.55;color:var(--ink)}.chart-values b{font-size:13px}.chart-values .value-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 14px;margin-top:4px}@media(max-width:520px){.chart-values .value-grid{grid-template-columns:1fr}}
 @media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.brand img{width:50px;height:50px}header h1{font-size:25px}.table-wrap{max-height:430px}}
 @media(max-width:420px){.kpis{grid-template-columns:1fr}.actions button{width:100%}}
-.chart-static-values{margin-top:10px}.chart-static-values .age-card{display:none;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#f8fafc;font-size:12px;line-height:1.55}.chart-static-values .age-card:target{display:block}.chart-static-values .age-card:first-child{display:block}.chart-static-values:has(.age-card:target) .age-card:first-child:not(:target){display:none}.chart-link{outline:none}.chart-link:focus rect{stroke:#172033;stroke-width:2}.tap-note{font-weight:700;color:var(--ink)}</style>
+.chart-static-values{margin-top:10px}.chart-static-values .age-card{display:none;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#f8fafc;font-size:12px;line-height:1.55}.chart-static-values .age-card:target{display:block}.chart-static-values .age-card:first-child{display:block}.chart-static-values:has(.age-card:target) .age-card:first-child:not(:target){display:none}.chart-link{outline:none}.chart-link:focus rect{stroke:#172033;stroke-width:2}.tap-note{font-weight:700;color:var(--ink)}
+/* Match the Otium logo across investment totals, gifts and action controls. */
+.total-strip,.gold-heading,.actions button,#addGift{background:var(--gold);color:#102A56}
+.gold-heading{padding:12px;border-radius:11px}
+.actions button:hover,#addGift:hover{background:#edb91b}
+.actions button:focus-visible,#addGift:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+</style>
 </head>
 <body>
 <header><div class="brand"><img src="icon-180.png" alt="Otium icon" onerror="this.style.display='none'"><div><h1>Otium</h1><p>Personal retirement & investment forecast</p></div></div></header>
@@ -101,7 +107,7 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <p class="note">Ownership defaults to 100% yours; change it for a joint holding. Your partner’s private pension increases by 2.5% by default, and tax thresholds are held constant unless you change that assumption. These are assumptions to check, not predictions of future tax policy. Distribution yield is included within the total investment return and assumed reinvested; reinvested income increases the Unit Trust cost basis. Cash savings interest is capitalised and taxed separately; ISA interest is exempt.</p>
 <p class="note">This is a full-year projection from the balances above, not a reconciliation of the partly completed 2026/27 tax year. Do not subtract past withdrawals from these current balances again. Historical employment income, pension payments and gains before the forecast start are not included. No other gains/losses, reliefs, Marriage Allowance or external investment income are assumed. Both people's pensions continue throughout; survivor changes are not modelled.</p>
 <p class="note">Sources checked 22 October 2026: <a href="https://www.gov.uk/income-tax-rates">Income Tax</a> · <a href="https://www.gov.uk/capital-gains-tax/rates">Capital Gains Tax</a> · <a href="https://www.gov.uk/tax-on-dividends">Dividends</a> · <a href="https://www.gov.uk/apply-tax-free-interest-on-savings">Savings</a> · <a href="https://www.gov.uk/tax-on-your-private-pension/lump-sum-allowance">Pension allowance</a>. Rates are held constant in the forecast. Personal allowances are allocated to ordinary income, then savings, then dividends; unusual income mixes may need a different allocation.</p>
-<h3>Planned gifts</h3>
+<h3 class="gold-heading">Planned gifts</h3>
 <p class="note">Enter gifts in pounds at the time of the gift (no inflation increase). Choose an age or calendar year. The selected pot is used first; any remaining need follows your withdrawal strategy, including withdrawal tax. Gifts are additional to annual spending.</p>
 <div id="giftRows"></div><button id="addGift" type="button" class="secondary">Add gift</button>
 <h3>Forecast assumptions</h3>
