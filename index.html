@@ -29,6 +29,7 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 .actions button:hover,#addGift:hover{background:#edb91b}
 .actions button:focus-visible,#addGift:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 #calculateBtn,#calculateBtn:hover{background:var(--accent);color:var(--gold)}
+.input-section{border:3px solid var(--accent);border-radius:12px;padding:14px;margin-top:18px;min-width:0}.input-section>h3:first-child{margin-top:0}
 </style>
 </head>
 <body>
@@ -66,6 +67,7 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div class="total-strip"><span>Total investments</span><span id="inputTotal">—</span></div>
 <p class="note">This app contains no personal balances. Enter figures or import a separate settings file. Changes are saved only in this browser; export settings to move them to another device.</p>
 
+<div class="input-section">
 <h3>Income & spending</h3>
 <p class="note">Spending is entered in today's money and increased annually by the inflation assumption.</p>
 <div class="grid">
@@ -81,6 +83,8 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div><label>State Pension annual increase (%)</label><input id="spIncrease" type="number" step=".1" value="2.5"></div>
 </div>
 
+</div>
+<div class="input-section">
 <h3>Withdrawal strategy</h3>
 <label for="withdrawalStrategy">Choose withdrawal strategy</label><select id="withdrawalStrategy"><option value="phased">Phased drawdown — planned withdrawals first</option><option value="ufpls">UFPLS — payments as needed</option><option value="cashFirst">Cash and ISAs first — then phased drawdown</option></select>
 <p id="strategyHelp" class="strategy"></p>
@@ -93,6 +97,8 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 </div>
 
 <div style="margin-top:11px"><label for="crystalliseTranche">New pension crystallisation tranche (£)</label><input id="crystalliseTranche" type="number" min="1" value="100000"></div>
+</div>
+<div class="input-section">
 <h3>Annual tax calculation — England, 2026/27 rules</h3>
 <p class="note">Existing crystallised withdrawals have no attached tax-free cash. Both crystallised accounts are treated as fully taxable; tax allowances are applied to your total income. Pension withdrawals can be covered by your personal allowance, but other income and your State Pension use the same allowance. Unit Trust gains and income are split by ownership. Each person has a separate tax calculation.</p>
 <div class="grid">
@@ -108,9 +114,13 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <p class="note">Ownership defaults to 100% yours; change it for a joint holding. Your partner’s private pension increases by 2.5% by default, and tax thresholds are held constant unless you change that assumption. These are assumptions to check, not predictions of future tax policy. Distribution yield is included within the total investment return and assumed reinvested; reinvested income increases the Unit Trust cost basis. Cash savings interest is capitalised and taxed separately; ISA interest is exempt.</p>
 <p class="note">This is a full-year projection from the balances above, not a reconciliation of the partly completed 2026/27 tax year. Do not subtract past withdrawals from these current balances again. Historical employment income, pension payments and gains before the forecast start are not included. No other gains/losses, reliefs, Marriage Allowance or external investment income are assumed. Both people's pensions continue throughout; survivor changes are not modelled.</p>
 <p class="note">Sources checked 22 October 2026: <a href="https://www.gov.uk/income-tax-rates">Income Tax</a> · <a href="https://www.gov.uk/capital-gains-tax/rates">Capital Gains Tax</a> · <a href="https://www.gov.uk/tax-on-dividends">Dividends</a> · <a href="https://www.gov.uk/apply-tax-free-interest-on-savings">Savings</a> · <a href="https://www.gov.uk/tax-on-your-private-pension/lump-sum-allowance">Pension allowance</a>. Rates are held constant in the forecast. Personal allowances are allocated to ordinary income, then savings, then dividends; unusual income mixes may need a different allocation.</p>
+</div>
+<div class="input-section">
 <h3 class="gold-heading">Planned gifts</h3>
 <p class="note">Enter gifts in pounds at the time of the gift (no inflation increase). Choose an age or calendar year. The selected pot is used first; any remaining need follows your withdrawal strategy, including withdrawal tax. Gifts are additional to annual spending.</p>
 <div id="giftRows"></div><button id="addGift" type="button" class="secondary">Add gift</button>
+</div>
+<div class="input-section">
 <h3>Forecast assumptions</h3>
 <div class="grid">
 <div><label for="withdrawalTiming">Annual withdrawal timing</label><select id="withdrawalTiming"><option value="mid">Mid-year (default)</option><option value="start">Beginning of year</option><option value="end">End of year</option></select></div>
@@ -123,6 +133,7 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div><label>Annual investment fees (%)</label><input id="fees" type="number" step=".1" value="1"></div>
 <div><label>Inflation (%)</label><input id="inflation" type="number" step=".1" value="2.5"></div>
 <div><label>Cash / Cash ISA interest (%)</label><input id="cashRate" type="number" step=".1" value="2.5"></div>
+</div>
 </div>
 <div class="actions"><button id="calculateBtn" type="button">Calculate forecast</button><button id="exportBtn" class="secondary" type="button">Export settings</button><button id="importBtn" class="secondary" type="button">Import settings</button><button id="legacyBtn" class="secondary" type="button">Load earlier saved inputs</button><button id="clearBtn" class="secondary" type="button">Start with blank figures</button><input id="importFile" type="file" accept=".json,application/json" hidden></div>
 <div id="status" class="status" aria-live="polite"></div><div id="taxWarning" class="strategy" style="margin-top:12px;border-color:#b7791f;background:#fffbeb"></div>
