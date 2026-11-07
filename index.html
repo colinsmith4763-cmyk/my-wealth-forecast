@@ -111,9 +111,10 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <div><label for="utYield">Unit Trust annual distribution yield (% of opening value)</label><input id="utYield" type="number" min="0" step="0.01" placeholder="Unknown — provisional 0%" value=""></div>
 <div><label for="utIncomeType">Unit Trust distributions treated as</label><select id="utIncomeType"><option value="dividend">Dividends</option><option value="interest">Interest</option></select></div>
 <div><label for="ppIncrease">Partner private pension annual increase (%)</label><input id="ppIncrease" type="number" step=".1" value="2.5"></div>
-<div><label for="thresholdIndex">Tax threshold annual increase from 2032 (%)</label><input id="thresholdIndex" type="number" min="0" step=".1" value="0"></div>
+<div><label for="thresholdIndex">Tax threshold annual increase (%)</label><input id="thresholdIndex" type="number" min="0" step=".1" value="0"></div>
+<div><label for="thresholdStartYear">Tax threshold increases start in year</label><input id="thresholdStartYear" type="number" min="2026" max="9999" step="1" value="2032"></div>
 </div>
-<p class="note">Ownership defaults to 100% yours; change it for a joint holding. Your partner’s private pension increases by 2.5% by default, and tax thresholds are held constant unless you change that assumption. These are assumptions to check, not predictions of future tax policy. Distribution yield is included within the total investment return and assumed reinvested; reinvested income increases the Unit Trust cost basis. Cash savings interest is capitalised and taxed separately; ISA interest is exempt.</p>
+<p class="note">Ownership defaults to 100% yours; change it for a joint holding. Your partner’s private pension increases by 2.5% by default, and tax thresholds are held constant unless you change that assumption. Any annual threshold increase first applies in your chosen starting year and compounds each year afterwards; 0% keeps thresholds fixed. These are assumptions to check, not predictions of future tax policy. Distribution yield is included within the total investment return and assumed reinvested; reinvested income increases the Unit Trust cost basis. Cash savings interest is capitalised and taxed separately; ISA interest is exempt.</p>
 <p class="note">This is a full-year projection from the balances above, not a reconciliation of the partly completed 2026/27 tax year. Do not subtract past withdrawals from these current balances again. Historical employment income, pension payments and gains before the forecast start are not included. No other gains/losses, reliefs, Marriage Allowance or external investment income are assumed. Both people's pensions continue throughout; survivor changes are not modelled.</p>
 <p class="note">Sources checked 22 October 2026: <a href="https://www.gov.uk/income-tax-rates">Income Tax</a> · <a href="https://www.gov.uk/capital-gains-tax/rates">Capital Gains Tax</a> · <a href="https://www.gov.uk/tax-on-dividends">Dividends</a> · <a href="https://www.gov.uk/apply-tax-free-interest-on-savings">Savings</a> · <a href="https://www.gov.uk/tax-on-your-private-pension/lump-sum-allowance">Pension allowance</a>. Rates are held constant in the forecast. Personal allowances are allocated to ordinary income, then savings, then dividends; unusual income mixes may need a different allocation.</p>
 </div>
@@ -217,7 +218,7 @@ const OtiumTax = (() => {
   const share=p.utShare/100,cashShare=p.cashShare/100;
   for(let y=0;y<p.years;y++){
    const age=p.age+y,year=p.startYear+y,inf=(1+p.inflation/100)**y;
-   const thresholdScale=(1+p.thresholdIndex/100)**Math.max(0,year-2031);
+   const thresholdScale=(1+p.thresholdIndex/100)**Math.max(0,year-(p.thresholdStartYear??2032)+1);
    const opening={...b},openingTotal=assets(b);
    let spend=(age<p.spendAge1?p.spend1:age<p.spendAge2?p.spend2:age<p.spendAge3?p.spend3:p.spend4)*inf;
    const lifestyleSpend=spend;
@@ -338,7 +339,7 @@ const OtiumTax = (() => {
 if(typeof module!=='undefined')module.exports=OtiumTax;
 
 const $=id=>document.getElementById(id);
-const fields=[...OtiumTax.assetKeys,'age','years','home','startYear','spend1','spendAge1','spend2','spendAge2','spend3','spendAge3','spend4','spouseSP','spousePP','userSP','spAge','otherIncome','spIncrease','crystAnnual','utAnnual','growth','fees','inflation','cashRate','remainingLsa','crystalliseTranche','withdrawalStrategy','utCost','utShare','cashShare','utYield','utIncomeType','ppIncrease','thresholdIndex','withdrawalTiming','spBasis','lsaStatus'];
+const fields=[...OtiumTax.assetKeys,'age','years','home','startYear','spend1','spendAge1','spend2','spendAge2','spend3','spendAge3','spend4','spouseSP','spousePP','userSP','spAge','otherIncome','spIncrease','crystAnnual','utAnnual','growth','fees','inflation','cashRate','remainingLsa','crystalliseTranche','withdrawalStrategy','utCost','utShare','cashShare','utYield','utIncomeType','ppIncrease','thresholdIndex','thresholdStartYear','withdrawalTiming','spBasis','lsaStatus'];
 const storageKey='otium-clean-settings-v1';
 const legacyKeys=['otium-annual-tax-review-20261022','otium-v16-inputs'];
 const textFields=['withdrawalStrategy','utIncomeType','withdrawalTiming','spBasis','lsaStatus'];
@@ -357,6 +358,7 @@ function getInputs(){
  if(p.years<1||p.years>50||!Number.isInteger(p.years))throw Error('Forecast years must be a whole number from 1 to 50.');
  if(!Number.isInteger(p.age)||p.age<18||p.age>110)throw Error('Please enter a valid starting age.');
  for(const k of fields)if(!textFields.includes(k)&&p[k]!==null&&p[k]<0)throw Error('Inputs must be zero or positive.');
+ if(!Number.isInteger(p.thresholdStartYear)||p.thresholdStartYear<2026||p.thresholdStartYear>9999)throw Error('Tax threshold starting year must be a whole year from 2026 to 9999.');
  if(!Number.isInteger(p.startYear)||p.startYear<2026)throw Error('Forecast start year must be 2026 or later for these tax rules.');
  if(!['mid','start','end'].includes(p.withdrawalTiming)||!['today','start'].includes(p.spBasis)||!['estimated','confirmed'].includes(p.lsaStatus)||!['dividend','interest'].includes(p.utIncomeType))throw Error('Invalid forecast option.');
  if(!['phased','ufpls','cashFirst'].includes(p.withdrawalStrategy))throw Error('Invalid withdrawal strategy.');
@@ -509,7 +511,7 @@ function run(){
   $('preShortfallLabel').textContent=firstShortfall?`Investments at start of age ${firstShortfall.age}–${firstShortfall.age+1}`:'Investments at start of first shortfall year';
   $('firstShortfallLabel').textContent=firstShortfall?`Unfunded spending and gifts during age ${firstShortfall.age}–${firstShortfall.age+1}`:'Unfunded spending in first shortfall year';
   $('cashRunout').textContent=result.firstCashExhaustion===null?'Beyond forecast':'Age '+result.firstCashExhaustion;
-  $('summary').textContent=`${provisional?'Provisional planning illustration. ':''}${strategyNames[p.withdrawalStrategy]}. ${p.withdrawalTiming==='mid'?'Mid-year':p.withdrawalTiming==='start'?'Beginning-of-year':'End-of-year'} withdrawals. Starting age ${p.age}; gross growth ${p.growth}%, fees ${p.fees}%, inflation ${p.inflation}%. Current England tax rates are held constant; thresholds increase by ${p.thresholdIndex}% a year from 2032. Home ${money(p.home)} is excluded. Planned gifts within the forecast: ${money(result.rows.reduce((total,r)=>total+r.giftTarget,0))}. Both people’s pensions continue throughout. Confirm missing inputs before relying on any depletion age.`;
+  $('summary').textContent=`${provisional?'Provisional planning illustration. ':''}${strategyNames[p.withdrawalStrategy]}. ${p.withdrawalTiming==='mid'?'Mid-year':p.withdrawalTiming==='start'?'Beginning-of-year':'End-of-year'} withdrawals. Starting age ${p.age}; gross growth ${p.growth}%, fees ${p.fees}%, inflation ${p.inflation}%. Current England tax rates are held constant; thresholds increase by ${p.thresholdIndex}% a year from ${p.thresholdStartYear}. Home ${money(p.home)} is excluded. Planned gifts within the forecast: ${money(result.rows.reduce((total,r)=>total+r.giftTarget,0))}. Both people’s pensions continue throughout. Confirm missing inputs before relying on any depletion age.`;
   $('tbody').innerHTML=result.rows.map(r=>'<tr>'+[`${r.age}–${r.age+1}`,r.year,...[r.openingTotal,r.spend,r.giftTarget,r.userSP,r.heatherSP,r.privatePP,r.regularGross,r.penGross,r.ufplsGross,r.crystallised,r.penTaxFree,r.utSold,r.realised,r.tax.income[0],r.tax.income[1],r.tax.cgt[0],r.tax.cgt[1],r.tax.total,r.netSpend,r.shortfall,r.liquid,r.cryst,r.uncryst,r.total,r.allowance].map(money)].map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
   drawChart(result.rows);
   $('status').textContent='Annual tax forecast updated. '+(provisional?'Missing tax inputs are flagged below.':'');
@@ -543,6 +545,7 @@ function applySettings(raw){
   }else if(value!==''&&(!Number.isFinite(Number(value))||Number(value)<0))throw Error('Invalid number: '+k);
   selected[k]=value;
  }
+ if(!Number.isInteger(Number(selected.thresholdStartYear))||Number(selected.thresholdStartYear)<2026||Number(selected.thresholdStartYear)>9999)throw Error('Tax threshold starting year must be a whole year from 2026 to 9999.');
  const gifts=validateGifts(data.gifts||[]);
  const importedBudgets=raw.budgets===undefined?null:OtiumExpenseStore.preserveCategoryIds(validateBudgets(raw.budgets),savedBudgets());
  const importedExpenses=raw.expenses===undefined?null:OtiumExpenseStore.validate(raw.expenses);
