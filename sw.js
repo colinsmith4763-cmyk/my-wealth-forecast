@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-wealth-forecast-v4';
+const CACHE_NAME = 'my-wealth-forecast-v5-manual-expenses';
 
 const STATIC_ASSETS = [
   './manifest.webmanifest',

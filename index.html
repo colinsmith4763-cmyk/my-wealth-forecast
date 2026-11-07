@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#F8C62D" /><link rel="manifest" href="manifest.webmanifest" />
 
 <link rel="apple-touch-icon" href="icon-180.png" />
-<meta name="otium-release" content="2026-11-06-section-menu-budget" />
+<meta name="otium-release" content="2026-11-07-manual-expenses" />
 
 
 <title>Otium — retirement forecast</title>
@@ -168,9 +168,9 @@ input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;
 <section class="card"><h2>Year-by-year spending and tax</h2><div class="table-wrap"><table><thead><tr><th>Age year</th><th>Year label</th><th>Opening assets</th><th>Spending + gifts target</th><th>Planned gifts</th><th>Your State Pension (gross)</th><th>Partner State Pension (gross)</th><th>Partner private pension (gross)</th><th>Gross regular income</th><th>Gross pension drawn</th><th>UFPLS gross paid</th><th>New pension crystallised</th><th>Tax-free pension cash</th><th>Unit Trust sold</th><th>UT realised gain</th><th>Your income tax</th><th>Partner income tax</th><th>Your CGT</th><th>Partner CGT</th><th>Total tax</th><th>Spending + gifts funded</th><th>Shortfall</th><th>End cash/ISAs/UT</th><th>End crystallised</th><th>End uncrystallised</th><th>End total</th><th>Remaining tax-free allowance</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
 <noscript><section class="card">Open this HTML in a browser with JavaScript enabled to calculate. An iPhone attachment preview may block calculation. No precomputed forecast is shown.</section></noscript>
 </main>
-<script>
+<script src="expense-data.js?v=20261107"></script><script>
 const budgetStorageKey='otium-monthly-budgets-v1';
-function validateBudgets(value){if(!value||typeof value!=='object'||Array.isArray(value))throw Error('Invalid budget settings');for(const[y,b]of Object.entries(value)){if(!/^\d{4}$/.test(y)||!b||!Number.isFinite(b.spend)||b.spend<0||!Array.isArray(b.rows)||b.rows.length>100||b.rows.some(r=>!Array.isArray(r)||typeof r[0]!=='string'||r[0].length>500||!Number.isFinite(r[1])||r[1]<0||r[1]>100))throw Error('Invalid budget settings')}return value}
+function validateBudgets(value){if(!value||typeof value!=='object'||Array.isArray(value))throw Error('Invalid budget settings');for(const[y,b]of Object.entries(value)){if(!/^\d{4}$/.test(y)||!b||!Number.isFinite(b.spend)||b.spend<0||!Array.isArray(b.rows)||b.rows.length>100||b.rows.some(r=>!Array.isArray(r)||typeof r[0]!=='string'||r[0].length>500||!Number.isFinite(r[1])||r[1]<0||r[1]>100||(r[2]!==undefined&&typeof r[2]!=='string')))throw Error('Invalid budget settings')}return value}
 function savedBudgets(){try{return validateBudgets(JSON.parse(localStorage.getItem(budgetStorageKey))||{})}catch{return {}}}
 </script><script>
 'use strict';
@@ -524,7 +524,7 @@ function clearResults(){
  for(const k of ['startWealth','endWealth','runout','preShortfallBalance','firstShortfallAmount','cashRunout'])$(k).textContent='—';
  $('tbody').innerHTML='';$('forecastChart').innerHTML='';$('summary').textContent='';$('taxWarning').textContent='';
 }
-function settings(){return {format:'otium-settings',version:1,inputs:{...Object.fromEntries(fields.map(k=>[k,$(k).value])),gifts:readGifts()},budgets:savedBudgets()};}
+function settings(){return {format:'otium-settings',version:1,inputs:{...Object.fromEntries(fields.map(k=>[k,$(k).value])),gifts:readGifts()},budgets:savedBudgets(),expenses:OtiumExpenseStore.read()};}
 function applySettings(raw){
  if(!raw||typeof raw!=='object'||Array.isArray(raw))throw Error('Choose an Otium settings JSON file.');
  if(raw.format&&raw.format!=='otium-settings')throw Error('This is not an Otium settings file.');
@@ -544,10 +544,12 @@ function applySettings(raw){
   selected[k]=value;
  }
  const gifts=validateGifts(data.gifts||[]);
- const importedBudgets=raw.budgets===undefined?null:validateBudgets(raw.budgets);
+ const importedBudgets=raw.budgets===undefined?null:OtiumExpenseStore.preserveCategoryIds(validateBudgets(raw.budgets),savedBudgets());
+ const importedExpenses=raw.expenses===undefined?null:OtiumExpenseStore.validate(raw.expenses);
  for(const k of fields)$(k).value=selected[k];
  $('giftRows').innerHTML='';gifts.forEach(addGift);
  if(importedBudgets!==null)localStorage.setItem(budgetStorageKey,JSON.stringify(importedBudgets));
+ if(importedExpenses!==null)localStorage.setItem(OtiumExpenseStore.key,JSON.stringify(importedExpenses));
  formatDistributionYield();
  updateStrategyUI();
 }
@@ -576,7 +578,7 @@ $('exportBtn').addEventListener('click',()=>{
 });
 $('importBtn').addEventListener('click',()=>$('importFile').click());
 $('importFile').addEventListener('change',async()=>{
- try{const file=$('importFile').files[0];if(!file)return;if(file.size>100000)throw Error('Settings file is too large.');applySettings(JSON.parse(await file.text()));run();}
+ try{const file=$('importFile').files[0];if(!file)return;if(file.size>10000000)throw Error('Settings file is too large.');applySettings(JSON.parse(await file.text()));run();}
  catch(e){$('status').textContent='Import failed: '+e.message;}
  finally{$('importFile').value='';}
 });
